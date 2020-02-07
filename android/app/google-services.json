@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "353545058150",
+    "firebase_url": "https://ekmtek-b230e.firebaseio.com",
+    "project_id": "ekmtek-b230e",
+    "storage_bucket": "ekmtek-b230e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:353545058150:android:b2789ea68c7b1660ba7aa7",
+        "android_client_info": {
+          "package_name": "br.com.ekmtek.flutter_siges"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "353545058150-8q1rj574335rci4n617st4ts9ovk3f2e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArSg2WngdbdZ8UBUZHDjAhFTVERY5U8lg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "353545058150-8q1rj574335rci4n617st4ts9ovk3f2e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
