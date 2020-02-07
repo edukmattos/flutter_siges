@@ -8,7 +8,7 @@ void main() async {
   runApp(ModularApp(module: AppModule()));
 
   await Firestore.instance.collection("clients")
-    .document("004")
+    .document()
       .setData(
         {
           "name": "ACMTek",
