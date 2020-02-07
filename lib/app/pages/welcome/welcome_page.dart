@@ -119,7 +119,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     blurRadius: 5,
                     spreadRadius: 2)
               ],
-              //gradient: LinearGradient(
+              //gradient: const LinearGradient(
               //  begin: Alignment.topCenter,
               //  end: Alignment.bottomCenter,
               //  colors: [Color(0xfffbb448), Color(0xffe46b10)],
