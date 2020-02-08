@@ -18,11 +18,11 @@ class AppModule extends MainModule {
 
   @override
   List<Router> get routers => [
-    Router('/', child: (_, args) => SplashPage()),
+    //Router('/', child: (_, args) => SplashPage()),
     Router('/welcome', child: (_, args) => WelcomePage(), transition: TransitionType.rightToLeft),
     Router('/auth', module: AuthModule(), transition: TransitionType.rightToLeft),
     Router('/auth/register', module: RegisterModule(), transition: TransitionType.rightToLeft),
-    Router('/client', module: ClientModule(), transition: TransitionType.rightToLeft),
+    Router('/', module: ClientModule(), transition: TransitionType.rightToLeft),
   ];
 
   @override

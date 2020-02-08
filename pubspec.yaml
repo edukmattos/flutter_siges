@@ -17,12 +17,11 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
-  firebase_auth: ^0.15.4
+  cloud_firestore_all: ^0.1.1+4
   hasura_connect: ^1.1.0
   intl: ^0.16.1
   flux_validator_dart: ^1.0.3
   google_fonts: ^0.3.7
-  cloud_firestore: ^0.13.1
   dio: ^3.0.8
   flutter_mobx: ^1.0.1
   mobx: ^1.0.1
