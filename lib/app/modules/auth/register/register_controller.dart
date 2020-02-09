@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flux_validator_dart/flux_validator_dart.dart';
 import 'package:mobx/mobx.dart';
 
@@ -59,8 +60,17 @@ abstract class _RegisterBase with Store {
   }
 
   @action
-  Future<bool> register() async {
-    //await _firebaseAuth.createUserWithEmailAndPassword(email, password);
-    return true;
+  Future<dynamic> register() async { 
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    print(email);
+    try {
+      final FirebaseUser user = (await _auth.createUserWithEmailAndPassword(
+        email: email,
+        password: password
+      )).user;
+      } catch (e) {
+      print(e);
+    }
+    return false;
   }
 }

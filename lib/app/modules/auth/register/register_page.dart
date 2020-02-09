@@ -27,7 +27,7 @@ class _RegisterPageState extends State<RegisterPage> {
               var result = await registerController.register();
               print(result);
               if (result) {
-                Navigator.pushNamed(context, '/client');
+                Navigator.pushNamed(context, '/clients');
               }
             }
           : null,

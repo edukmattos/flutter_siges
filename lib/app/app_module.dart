@@ -1,4 +1,4 @@
-  import 'package:flutter_siges/app/repositories/user_repository.dart';
+import 'package:flutter_siges/app/repositories/user_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_siges/app/modules/auth/register/register_module.dart';
@@ -18,11 +18,11 @@ class AppModule extends MainModule {
 
   @override
   List<Router> get routers => [
-    //Router('/', child: (_, args) => SplashPage()),
+    Router('/', child: (_, args) => SplashPage()),
     Router('/welcome', child: (_, args) => WelcomePage(), transition: TransitionType.rightToLeft),
     Router('/auth', module: AuthModule(), transition: TransitionType.rightToLeft),
     Router('/auth/register', module: RegisterModule(), transition: TransitionType.rightToLeft),
-    Router('/', module: ClientModule(), transition: TransitionType.rightToLeft),
+    Router('/clients', module: ClientModule(), transition: TransitionType.rightToLeft),
   ];
 
   @override
