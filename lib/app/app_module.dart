@@ -1,3 +1,4 @@
+import 'package:flutter_siges/app/repositories/auth_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:hasura_connect/hasura_connect.dart';
@@ -22,6 +23,7 @@ class AppModule extends MainModule {
 
   @override
   List<Bind> get binds => [
+        Bind((i) => AuthRepository()),
         Bind((i) => UserRepository()),
         Bind((i) => WelcomeController()),
         Bind((i) => SplashController()),
