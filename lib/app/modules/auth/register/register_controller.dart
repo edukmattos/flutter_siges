@@ -9,8 +9,8 @@ class RegisterController = _RegisterBase with _$RegisterController;
 
 abstract class _RegisterBase with Store {
 
-  final SharedPreferences shared;
-  _RegisterBase(this.shared);
+  final SharedPreferences sharedPreferences;
+  _RegisterBase(this.sharedPreferences);
   
   @observable
   String name;
@@ -73,7 +73,7 @@ abstract class _RegisterBase with Store {
         var valid = tokenId != null;
 
         if(valid) {
-          shared.setString("token", tokenId.token);
+          sharedPreferences.setString("token", tokenId.token);
         }
 
         return valid;
