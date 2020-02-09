@@ -59,7 +59,7 @@ abstract class _RegisterBase with Store {
   }
 
   @action
-  Future<dynamic> register() async { 
+  Future<dynamic> signUp() async { 
     final FirebaseAuth _auth = FirebaseAuth.instance;
     print(email);
     try {

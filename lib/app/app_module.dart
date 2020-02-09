@@ -11,7 +11,7 @@ import 'modules/auth/auth_module.dart';
 import 'modules/auth/register/register_module.dart';
 import 'modules/client/client_module.dart';
 import 'pages/splash/splash_controller.dart';
-import 'pages/splash/splash_page.dart';
+import 'modules/splash/splash_module.dart';
 import 'pages/welcome/welcome_controller.dart';
 import 'pages/welcome/welcome_page.dart';
 import 'repositories/user_repository.dart';
@@ -23,7 +23,7 @@ class AppModule extends MainModule {
 
   @override
   List<Bind> get binds => [
-        Bind((i) => AuthRepository()),
+        //Bind((i) => AuthRepository(get)),
         Bind((i) => UserRepository()),
         Bind((i) => WelcomeController()),
         Bind((i) => SplashController()),
@@ -34,7 +34,8 @@ class AppModule extends MainModule {
 
   @override
   List<Router> get routers => [
-        Router('/', child: (_, args) => SplashPage()),
+        Router('/',
+            module: SplashModule(), transition: TransitionType.rightToLeft),
         Router('/welcome',
             child: (_, args) => WelcomePage(),
             transition: TransitionType.rightToLeft),

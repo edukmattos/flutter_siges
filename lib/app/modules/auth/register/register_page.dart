@@ -24,10 +24,12 @@ class _RegisterPageState extends State<RegisterPage> {
       //shape: StadiumBorder(),
       onPressed: registerController.isFormValid
           ? () async {
-              var result = await registerController.register();
+              var result = await registerController.signUp();
               print(result);
               if (result) {
-                Navigator.pushNamed(context, '/clients');
+                Navigator.pushReplacementNamed(context, '/clients');
+              } else {
+                Navigator.pushReplacementNamed(context, '/auht');
               }
             }
           : null,

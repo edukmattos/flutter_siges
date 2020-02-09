@@ -83,11 +83,11 @@ mixin _$RegisterController on _RegisterBase, Store {
     }, _$passwordConfirmAtom, name: '${_$passwordConfirmAtom.name}_set');
   }
 
-  final _$registerAsyncAction = AsyncAction('register');
+  final _$signUpAsyncAction = AsyncAction('signUp');
 
   @override
-  Future<dynamic> register() {
-    return _$registerAsyncAction.run(() => super.register());
+  Future<dynamic> signUp() {
+    return _$signUpAsyncAction.run(() => super.signUp());
   }
 
   final _$_RegisterBaseActionController =
