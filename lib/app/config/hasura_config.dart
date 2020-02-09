@@ -1,0 +1,1 @@
+const String hasura_config_url = "https://hero-siges.herokuapp.com/v1/graphql";

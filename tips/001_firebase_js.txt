@@ -1,0 +1,9 @@
+sudo npm install -g firebase-tools
+sudo npm install firebase-functions@latest firebase-admin@latest --save
+sudo npm install -g firebase-tools
+firebase login
+firebase init functions
+ -> use an existing project 
+ -> javascript
+ -> Y
+ -> Y

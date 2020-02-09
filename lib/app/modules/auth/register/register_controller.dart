@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flux_validator_dart/flux_validator_dart.dart';
 import 'package:mobx/mobx.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 part 'register_controller.g.dart';
 
@@ -8,10 +9,8 @@ class RegisterController = _RegisterBase with _$RegisterController;
 
 abstract class _RegisterBase with Store {
 
-  //_RegisterBase({Auth firebaseAuth})
-  //    : _firebaseAuth = firebaseAuth ?? auth();
-
-  //final Auth _firebaseAuth;
+  final SharedPreferences shared;
+  _RegisterBase(this.shared);
   
   @observable
   String name;
@@ -68,9 +67,19 @@ abstract class _RegisterBase with Store {
         email: email,
         password: password
       )).user;
+
+        var tokenId = await user.getIdToken();
+
+        var valid = tokenId != null;
+
+        if(valid) {
+          shared.setString("token", tokenId.token);
+        }
+
+        return valid;
+
       } catch (e) {
       print(e);
     }
-    return false;
   }
 }
