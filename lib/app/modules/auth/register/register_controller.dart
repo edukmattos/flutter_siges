@@ -78,7 +78,7 @@ abstract class _RegisterBase with Store {
 
         return valid;
 
-      } catch (e) {
+    } catch (e) {
       print(e);
     }
   }

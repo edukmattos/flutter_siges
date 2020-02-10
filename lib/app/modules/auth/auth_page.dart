@@ -24,9 +24,12 @@ class _AuthPageState extends State<AuthPage> {
       //shape: StadiumBorder(),
       onPressed: authController.isFormValid
           ? () async {
-              var result = await authController.login();
+              var result = await authController.signIn();
+              print(result);
               if (result) {
-                Navigator.pushNamed(context, '/client');
+                Navigator.pushReplacementNamed(context, '/clients');
+              } else {
+                Navigator.pushReplacementNamed(context, '/');
               }
             }
           : null,

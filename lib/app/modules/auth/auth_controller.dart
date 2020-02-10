@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flux_validator_dart/flux_validator_dart.dart';
 import 'package:mobx/mobx.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -8,8 +10,8 @@ class AuthController = _AuthBase with _$AuthController;
 
 abstract class _AuthBase with Store {
 
-  final SharedPreferences shared;
-  _AuthBase(this.shared);
+  final SharedPreferences sharedPreferences;
+  _AuthBase(this.sharedPreferences);
 
   @observable
   String name;
@@ -35,19 +37,38 @@ abstract class _AuthBase with Store {
   }
   
   String validateEmail() {
-    if (validatorRequired(email)) return "Obrigatorio";
-    if (validatorEmail(email)) return "Invalido";
+    if (validatorRequired(email)) return "Obrigatorio.";
+    if (validatorEmail(email)) return "Invalido.";
     return null;
   }
 
   String validatePassword() {
-    if (validatorRequired(password)) return "Obrigatorio";
+    if (validatorRequired(password)) return "Obrigatorio.";
     return null;
   }
 
   @action
-  Future<bool> login() async {
-    return false;
-  }
+  Future<dynamic> signIn() async { 
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    print(email);
+    try {
+      final FirebaseUser user = (await _auth.signInWithEmailAndPassword(
+        email: email,
+        password: password
+      )).user;
 
+        var tokenId = await user.getIdToken();
+
+        var valid = tokenId != null;
+
+        if(valid) {
+          sharedPreferences.setString("token", tokenId.token);
+        }
+
+        return valid;
+
+      } catch (e) {
+      print(e);
+    }
+  }  
 }

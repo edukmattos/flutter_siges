@@ -1,4 +1,3 @@
-import 'package:flutter_siges/app/repositories/auth_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:hasura_connect/hasura_connect.dart';
@@ -13,7 +12,7 @@ import 'modules/client/client_module.dart';
 import 'pages/splash/splash_controller.dart';
 import 'modules/splash/splash_module.dart';
 import 'pages/welcome/welcome_controller.dart';
-import 'pages/welcome/welcome_page.dart';
+import 'modules/welcome/welcome_module.dart';
 import 'repositories/user_repository.dart';
 
 class AppModule extends MainModule {
@@ -37,8 +36,7 @@ class AppModule extends MainModule {
         Router('/',
             module: SplashModule(), transition: TransitionType.rightToLeft),
         Router('/welcome',
-            child: (_, args) => WelcomePage(),
-            transition: TransitionType.rightToLeft),
+            module: WelcomeModule(), transition: TransitionType.rightToLeft),
         Router('/auth',
             module: AuthModule(), transition: TransitionType.rightToLeft),
         Router('/auth/register',

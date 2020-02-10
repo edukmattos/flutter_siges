@@ -29,7 +29,7 @@ class _RegisterPageState extends State<RegisterPage> {
               if (result) {
                 Navigator.pushReplacementNamed(context, '/clients');
               } else {
-                Navigator.pushReplacementNamed(context, '/auht');
+                Navigator.pushReplacementNamed(context, '/auth');
               }
             }
           : null,

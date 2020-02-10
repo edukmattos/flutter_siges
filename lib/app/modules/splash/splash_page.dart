@@ -2,6 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+
+import '../../modules/splash/splash_controller.dart';
 
 class SplashPage extends StatefulWidget {
   @override
@@ -10,6 +13,9 @@ class SplashPage extends StatefulWidget {
 
 class SplashPageState extends State<SplashPage>
     with SingleTickerProviderStateMixin {
+
+  final splashController = Modular.get<SplashController>(); 
+
   var _visible = true;
 
   AnimationController animationController;

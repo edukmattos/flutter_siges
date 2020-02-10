@@ -66,11 +66,11 @@ mixin _$AuthController on _AuthBase, Store {
     }, _$passwordAtom, name: '${_$passwordAtom.name}_set');
   }
 
-  final _$loginAsyncAction = AsyncAction('login');
+  final _$signInAsyncAction = AsyncAction('signIn');
 
   @override
-  Future<bool> login() {
-    return _$loginAsyncAction.run(() => super.login());
+  Future<dynamic> signIn() {
+    return _$signInAsyncAction.run(() => super.signIn());
   }
 
   final _$_AuthBaseActionController = ActionController(name: '_AuthBase');
