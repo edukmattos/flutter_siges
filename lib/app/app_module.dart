@@ -1,3 +1,6 @@
+import 'package:flutter_siges/app/modules/city/city_module.dart';
+import 'package:flutter_siges/app/repositories/auth_repository.dart';
+import 'package:flutter_siges/app/repositories/city_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:hasura_connect/hasura_connect.dart';
@@ -22,11 +25,15 @@ class AppModule extends MainModule {
 
   @override
   List<Bind> get binds => [
-        //Bind((i) => AuthRepository(get)),
+        //Repositories
+        Bind((i) => CityRepository(i.get<HasuraConnect>())),
+        //Bind((i) => AuthRepository()),
         Bind((i) => UserRepository()),
+        //Controllers
         Bind((i) => WelcomeController()),
         Bind((i) => SplashController()),
         Bind((i) => AppController()),
+        //Others
         Bind((i) => sharedPreferences),
         Bind((i) => HasuraConnect(hasura_config_url)),
       ];
@@ -34,7 +41,7 @@ class AppModule extends MainModule {
   @override
   List<Router> get routers => [
         Router('/',
-            module: SplashModule(), transition: TransitionType.rightToLeft),
+            module: CityModule(), transition: TransitionType.rightToLeft),
         Router('/welcome',
             module: WelcomeModule(), transition: TransitionType.rightToLeft),
         Router('/auth',
