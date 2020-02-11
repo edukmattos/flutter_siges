@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 class CityModel {
-    final int id;
-    final String description;
-    final Regions regions;
+    int id;
+    String description;
+    Regions regions;
 
     CityModel({
         this.id,
@@ -27,22 +27,29 @@ class CityModel {
     String toJson() => json.encode(toMap());
 
     factory CityModel.fromMap(Map<String, dynamic> json) => CityModel(
-        id: json["id"] == null ? null : json["id"],
-        description: json["description"] == null ? null : json["description"],
-        regions: json["regions"] == null ? null : Regions.fromMap(json["regions"]),
+        id: json["id"],
+        description: json["description"],
+        regions: Regions.fromMap(json["regions"]),
     );
 
     Map<String, dynamic> toMap() => {
-        "id": id == null ? null : id,
-        "description": description == null ? null : description,
-        "regions": regions == null ? null : regions.toMap(),
+        "id": id,
+        "description": description,
+        "regions": regions.toMap(),
     };
+
+    static List<CityModel> fromJsonList(List list) {
+      if (list == null) return null;
+      return list
+        .map<CityModel>((item) => CityModel.fromJson(item))
+        .toList();
+    }
 }
 
 class Regions {
-    final int id;
-    final String code;
-    final String description;
+    int id;
+    String code;
+    String description;
 
     Regions({
         this.id,
@@ -66,21 +73,14 @@ class Regions {
     String toJson() => json.encode(toMap());
 
     factory Regions.fromMap(Map<String, dynamic> json) => Regions(
-        id: json["id"] == null ? null : json["id"],
-        code: json["code"] == null ? null : json["code"],
-        description: json["description"] == null ? null : json["description"],
+        id: json["id"],
+        code: json["code"],
+        description: json["description"],
     );
 
     Map<String, dynamic> toMap() => {
-        "id": id == null ? null : id,
-        "code": code == null ? null : code,
-        "description": description == null ? null : description,
+        "id": id,
+        "code": code,
+        "description": description,
     };
-
-    List<CityModel> fromJsonList(List list) {
-      if (list == null) return null;
-      return list
-        .map<CityModel>((item) => CityModel.fromMap(item))
-        .toList();
-    }
 }

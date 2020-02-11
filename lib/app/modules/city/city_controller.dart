@@ -11,16 +11,9 @@ abstract class _CityBase with Store {
   final CityRepository _cityRepository;
 
   _CityBase(this._cityRepository) {
-    _cityRepository.getCities().then((data) {
-      cityList = data;
-    });
+    _cityRepository.getCities().then((data) => cities = data);
   }
 
   @observable
-  List<CityModel> cityList = [
-    {
-      "description": "Porto Alegre"
-    }
-  ];
-  
+  List<CityModel> cities = [];  
 }

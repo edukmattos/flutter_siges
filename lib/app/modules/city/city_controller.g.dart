@@ -9,20 +9,20 @@ part of 'city_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$CityController on _CityBase, Store {
-  final _$cityListAtom = Atom(name: '_CityBase.cityList');
+  final _$citiesAtom = Atom(name: '_CityBase.cities');
 
   @override
-  List<CityModel> get cityList {
-    _$cityListAtom.context.enforceReadPolicy(_$cityListAtom);
-    _$cityListAtom.reportObserved();
-    return super.cityList;
+  List<CityModel> get cities {
+    _$citiesAtom.context.enforceReadPolicy(_$citiesAtom);
+    _$citiesAtom.reportObserved();
+    return super.cities;
   }
 
   @override
-  set cityList(List<CityModel> value) {
-    _$cityListAtom.context.conditionallyRunInAction(() {
-      super.cityList = value;
-      _$cityListAtom.reportChanged();
-    }, _$cityListAtom, name: '${_$cityListAtom.name}_set');
+  set cities(List<CityModel> value) {
+    _$citiesAtom.context.conditionallyRunInAction(() {
+      super.cities = value;
+      _$citiesAtom.reportChanged();
+    }, _$citiesAtom, name: '${_$citiesAtom.name}_set');
   }
 }
