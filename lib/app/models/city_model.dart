@@ -41,7 +41,7 @@ class CityModel {
     static List<CityModel> fromJsonList(List list) {
       if (list == null) return null;
       return list
-        .map<CityModel>((item) => CityModel.fromJson(item))
+        .map<CityModel>((item) => CityModel.fromMap(item))
         .toList();
     }
 }

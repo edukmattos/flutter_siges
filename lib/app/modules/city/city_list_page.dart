@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-
-import 'package:cloud_firestore_all/cloud_firestore_all.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_siges/app/modules/city/city_controller.dart';
@@ -28,10 +26,10 @@ class _CityListPageState extends State<CityListPage> {
         name: 'cities',
         builder: (BuildContext context) {
           return ListView.builder(
-            itemCount: cityController.cityList.length,
+            itemCount: cityController.cities.length,
             itemBuilder: (BuildContext context, int index) {
               return Text(
-                cityController.cityList[index].description
+                cityController.cities[index].regions.description
               );
             }
           );

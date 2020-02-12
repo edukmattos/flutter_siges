@@ -8,7 +8,7 @@ class CityRepository extends Disposable {
 
   CityRepository(this._hasuraConnect);
 
-  Future<List<String>> getCities() async {
+  Future<List<CityModel>> getCities() async {
     var select = '''
       query getCities {
         cities {
@@ -24,8 +24,10 @@ class CityRepository extends Disposable {
     ''';
 
     var snapshot = await _hasuraConnect.query(select);
+
+    print("snapshot: $snapshot");
     
-    return CityModel.fromJsonList(snapshot);
+    return CityModel.fromJsonList(snapshot['data']['cities'] as List);
   }
   
 
