@@ -9,24 +9,28 @@ class AuthRepository extends Disposable {
 
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
-  Future<bool> signIn(String email, String password) async {
+  Future<dynamic> signIn(String email, String password) async { 
+    print(email);
     try {
-      AuthResult result = await _firebaseAuth.signInWithEmailAndPassword(
-        email: email, password: password);
-      FirebaseUser user = result.user;
+      final FirebaseUser user = (await _firebaseAuth.signInWithEmailAndPassword(
+        email: email,
+        password: password
+      )).user;
 
-      var tokenId = await user.getIdToken();
-      var valid = tokenId != null;
+        var tokenId = await user.getIdToken();
 
-      if(valid) {
-        sharedPreferences.setString("token", tokenId.token);
+        var valid = tokenId != null;
 
-        return valid;
-      }
+        if(valid) {
+          sharedPreferences.setString("token", tokenId.token);
+        }
+
+        return true;
+
+      } catch (e) {
+      print(e);
+
       return false;
-      //return user.uid;
-    } catch (e) {
-      throw new AuthException(e.code, e.message);
     }
   }
 

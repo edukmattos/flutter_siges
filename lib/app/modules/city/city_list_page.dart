@@ -29,7 +29,7 @@ class _CityListPageState extends State<CityListPage> {
             itemCount: cityController.cities.length,
             itemBuilder: (BuildContext context, int index) {
               return Text(
-                cityController.cities[index].regions.description
+                cityController.cities[index].description
               );
             }
           );

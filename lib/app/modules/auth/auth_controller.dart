@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_siges/app/repositories/auth_repository.dart';
 import 'package:flux_validator_dart/flux_validator_dart.dart';
 import 'package:mobx/mobx.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -10,8 +11,10 @@ class AuthController = _AuthBase with _$AuthController;
 
 abstract class _AuthBase with Store {
 
+  final AuthRepository _authRepository;
   final SharedPreferences sharedPreferences;
-  _AuthBase(this.sharedPreferences);
+
+  _AuthBase(this._authRepository, this.sharedPreferences);
 
   @observable
   String name;
@@ -47,28 +50,7 @@ abstract class _AuthBase with Store {
     return null;
   }
 
-  @action
-  Future<dynamic> signIn() async { 
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    print(email);
-    try {
-      final FirebaseUser user = (await _auth.signInWithEmailAndPassword(
-        email: email,
-        password: password
-      )).user;
-
-        var tokenId = await user.getIdToken();
-
-        var valid = tokenId != null;
-
-        if(valid) {
-          sharedPreferences.setString("token", tokenId.token);
-        }
-
-        return valid;
-
-      } catch (e) {
-      print(e);
-    }
+  signIn() { 
+    _authRepository.signIn(email, password);
   }  
 }

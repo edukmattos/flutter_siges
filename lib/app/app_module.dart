@@ -41,7 +41,7 @@ class AppModule extends MainModule {
   @override
   List<Router> get routers => [
         Router('/',
-            module: CityModule(), transition: TransitionType.rightToLeft),
+            module: SplashModule(), transition: TransitionType.rightToLeft),
         Router('/welcome',
             module: WelcomeModule(), transition: TransitionType.rightToLeft),
         Router('/auth',

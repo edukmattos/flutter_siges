@@ -25,7 +25,7 @@ class _AuthPageState extends State<AuthPage> {
       onPressed: authController.isFormValid
           ? () async {
               var result = await authController.signIn();
-              print(result);
+              print("result: $result");
               if (result) {
                 Navigator.pushReplacementNamed(context, '/clients');
               } else {
