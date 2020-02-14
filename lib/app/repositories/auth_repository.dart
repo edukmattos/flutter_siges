@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -7,30 +8,54 @@ class AuthRepository extends Disposable {
   final SharedPreferences sharedPreferences;
   AuthRepository(this.sharedPreferences);
 
+  String _errorMsg; 
+  bool valid = true;
+
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   Future<dynamic> signIn(String email, String password) async { 
-    print(email);
+    
     try {
-      final FirebaseUser user = (await _firebaseAuth.signInWithEmailAndPassword(
-        email: email,
-        password: password
-      )).user;
+      AuthResult result = (await _firebaseAuth.signInWithEmailAndPassword(
+        email: email.trim(),
+        password: password.trim()
+      ));
+      
+      var user = result.user;
 
-        var tokenId = await user.getIdToken();
+      var tokenId = await user.getIdToken();
 
-        var valid = tokenId != null;
+      var valid = tokenId != null;
 
-        if(valid) {
-          sharedPreferences.setString("token", tokenId.token);
-        }
+      if(valid) {
+        sharedPreferences.setString("token", tokenId.token);
+      }
 
-        return true;
+      print("valid: $valid");
 
-      } catch (e) {
-      print(e);
+      return valid;
+      
+    } catch (e) {
 
-      return false;
+      valid = false;
+
+      print("valid: $valid");
+
+      print(e.code);
+
+      switch (e.code) {
+        case 'auth/wrong-password':
+          _errorMsg = 'Ops... Senha incorreta !';
+          print(_errorMsg);
+          break;
+        
+        case 'auth/user-not-found':
+          _errorMsg = 'Ops... E-mail inexistente !';
+          print(_errorMsg);
+          break;
+
+        default:
+      }
     }
   }
 

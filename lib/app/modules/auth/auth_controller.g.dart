@@ -97,4 +97,14 @@ mixin _$AuthController on _AuthBase, Store {
       _$_AuthBaseActionController.endAction(_$actionInfo);
     }
   }
+
+  @override
+  dynamic signIn() {
+    final _$actionInfo = _$_AuthBaseActionController.startAction();
+    try {
+      return super.signIn();
+    } finally {
+      _$_AuthBaseActionController.endAction(_$actionInfo);
+    }
+  }
 }

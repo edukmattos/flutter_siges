@@ -50,7 +50,8 @@ abstract class _AuthBase with Store {
     return null;
   }
 
+  @action
   signIn() { 
     _authRepository.signIn(email, password);
-  }  
+  } 
 }
