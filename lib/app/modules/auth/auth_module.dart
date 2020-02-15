@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_siges/app/app_module.dart';
 import 'package:flutter_siges/app/modules/auth/auth_controller.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -12,13 +13,14 @@ class AuthModule extends ChildModule {
   @override
   List<Bind> get binds => [
         //Controllers
-        Bind((i) => AuthController(i.get<AuthRepository>(), AppModule.to.get<SharedPreferences>())),
-        Bind((i) => RegisterController(AppModule.to.get<SharedPreferences>())),
+        Bind((i) => AuthController(i.get<AuthRepository>())),
+        Bind((i) => RegisterController()),
         // Repositories
-        Bind((i) => AuthRepository(AppModule.to.get<SharedPreferences>())),
+        Bind((i) => AuthRepository()),
 
         // Others
-        Bind((i) => CustomHasuraConnectWidget.getConnect(AppModule.to.get<SharedPreferences>())),
+        Bind((i) => CustomHasuraConnectWidget.getConnect(i.get<FirebaseAuth>())),
+        Bind((i) => FirebaseAuth.instance)
       ];
 
   @override

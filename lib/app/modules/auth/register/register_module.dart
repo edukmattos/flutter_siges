@@ -1,14 +1,12 @@
-import 'package:flutter_siges/app/modules/auth/register/register_controller.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_siges/app/modules/auth/register/register_page.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../app_module.dart';
+import 'register_controller.dart';
+import 'register_page.dart';
 
 class RegisterModule extends ChildModule {
   @override
   List<Bind> get binds => [
-        Bind((i) => RegisterController(AppModule.to.get<SharedPreferences>())),
+        Bind((i) => RegisterController()),
       ];
 
   @override

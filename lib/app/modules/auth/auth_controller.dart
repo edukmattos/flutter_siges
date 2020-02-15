@@ -1,9 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_siges/app/repositories/auth_repository.dart';
 import 'package:flux_validator_dart/flux_validator_dart.dart';
 import 'package:mobx/mobx.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../repositories/auth_repository.dart';
 
 part 'auth_controller.g.dart';
 
@@ -12,9 +10,8 @@ class AuthController = _AuthBase with _$AuthController;
 abstract class _AuthBase with Store {
 
   final AuthRepository _authRepository;
-  final SharedPreferences sharedPreferences;
-
-  _AuthBase(this._authRepository, this.sharedPreferences);
+  
+  _AuthBase(this._authRepository);
 
   @observable
   String name;

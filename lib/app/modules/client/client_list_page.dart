@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:cloud_firestore_all/cloud_firestore_all.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ClientListPage extends StatefulWidget {
@@ -26,9 +28,10 @@ class _ClientListPageState extends State<ClientListPage> {
           IconButton(
             icon: Icon(Icons.power_settings_new),
             onPressed: () async {
-              SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-              var token = sharedPreferences.setString('token', null);
-              Navigator.pushReplacementNamed(context, '/');
+              var user = await FirebaseAuth.instance.currentUser();
+              user.delete();
+              
+              Modular.to.pushReplacementNamed('/');
             },
           ),        
         ],

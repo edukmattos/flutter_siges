@@ -5,9 +5,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthRepository extends Disposable {
 
-  final SharedPreferences sharedPreferences;
-  AuthRepository(this.sharedPreferences);
-
   String _errorMsg; 
   bool valid = true;
 
@@ -26,10 +23,6 @@ class AuthRepository extends Disposable {
       var tokenId = await user.getIdToken();
 
       var valid = tokenId != null;
-
-      if(valid) {
-        sharedPreferences.setString("token", tokenId.token);
-      }
 
       print("valid: $valid");
 
@@ -54,6 +47,11 @@ class AuthRepository extends Disposable {
           print(_errorMsg);
           break;
 
+        case 'auth/user-disabled':
+          _errorMsg = 'Ops... Conta Desabilitada !';
+          print(_errorMsg);
+          break;
+          
         default:
       }
     }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class WelcomePage extends StatefulWidget {
@@ -14,7 +15,7 @@ class _WelcomePageState extends State<WelcomePage> {
   Widget _signInButton() {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, '/auth');
+        Modular.to.pushNamed('/auth');
       },
       child: Container(
         width: MediaQuery.of(context).size.width,
@@ -41,7 +42,7 @@ class _WelcomePageState extends State<WelcomePage> {
   Widget _signUpButton() {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, '/auth/register');
+        Modular.to.pushNamed('/auth/register');
       },
       child: Container(
         width: MediaQuery.of(context).size.width,

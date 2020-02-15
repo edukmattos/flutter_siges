@@ -11,10 +11,8 @@ class SplashPage extends StatefulWidget {
   SplashPageState createState() => SplashPageState();
 }
 
-class SplashPageState extends State<SplashPage>
+class SplashPageState extends ModularState<SplashPage, SplashController>
     with SingleTickerProviderStateMixin {
-
-  final splashController = Modular.get<SplashController>(); 
 
   var _visible = true;
 
@@ -27,7 +25,7 @@ class SplashPageState extends State<SplashPage>
   }
 
   void navigationPage() {
-    Navigator.pushNamed(context, '/welcome');
+    Modular.to.pushNamed('/welcome');
   }
 
   @override

@@ -13,23 +13,22 @@ class AuthPage extends StatefulWidget {
   _AuthPageState createState() => _AuthPageState();
 }
 
-class _AuthPageState extends State<AuthPage> {
-  final authController = Modular.get<AuthController>();
-
+class _AuthPageState extends ModularState<AuthPage, AuthController> {
+  
   Widget _submitButton() {
     return RaisedButton(
       child: new Text("ENTRAR", style: new TextStyle(color: Colors.white)),
       color: Colors.orange,
       elevation: 15.0,
       //shape: StadiumBorder(),
-      onPressed: authController.isFormValid
+      onPressed: controller.isFormValid
           ? () async {
-              var result = await authController.signIn();
+              var result = await controller.signIn();
               print("result: $result");
               if (result) {
-                Navigator.pushReplacementNamed(context, '/clients');
+                Modular.to.pushReplacementNamed('/clients');
               } else {
-                Navigator.pushReplacementNamed(context, '/');
+                Modular.to.pushReplacementNamed('/');
               }
             }
           : null,
@@ -93,7 +92,7 @@ class _AuthPageState extends State<AuthPage> {
                     name: 'email',
                     builder: (_) {
                       return TextFormField(
-                        onChanged: authController.changeEmail,
+                        onChanged: controller.changeEmail,
                         obscureText: false,
                         maxLines: 1,
                         keyboardType: TextInputType.emailAddress,
@@ -104,7 +103,7 @@ class _AuthPageState extends State<AuthPage> {
                             prefixIcon: Icon(Icons.email,
                                 color: Colors.orange, size: 20),
                             helperText: ' ',
-                            errorText: authController.validateEmail()),
+                            errorText: controller.validateEmail()),
                         //validator: (value) {
                         //  if (Validator.required(value)) return 'Obrigatorio.';
                         //  if (Validator.email(value)) return 'Invalido.';
@@ -119,7 +118,7 @@ class _AuthPageState extends State<AuthPage> {
                     name: 'password',
                     builder: (_) {
                       return TextFormField(
-                        onChanged: authController.changePassword,
+                        onChanged: controller.changePassword,
                         obscureText: true,
                         maxLines: 1,
                         maxLength: 10,
@@ -131,7 +130,7 @@ class _AuthPageState extends State<AuthPage> {
                             prefixIcon: Icon(Icons.lock,
                                 color: Colors.orange, size: 20),
                             helperText: ' ',
-                            errorText: authController.validatePassword()),
+                            errorText: controller.validatePassword()),
                         //validator: (value) {
                         //  if (Validator.required(value)) return 'Obrigatorio.';
                         //  return null;

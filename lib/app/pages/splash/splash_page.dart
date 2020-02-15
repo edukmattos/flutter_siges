@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class SplashPage extends StatefulWidget {
   @override
@@ -21,7 +22,7 @@ class SplashPageState extends State<SplashPage>
   }
 
   void navigationPage() {
-    Navigator.pushNamed(context, '/welcome');
+    Modular.to.pushNamed('/welcome');
   }
 
   @override

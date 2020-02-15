@@ -12,21 +12,19 @@ class WelcomePage extends StatefulWidget {
   _WelcomePageState createState() => _WelcomePageState();
 }
 
-class _WelcomePageState extends State<WelcomePage> {
-
-  final welcomeController = Modular.get<WelcomeController>();
+class _WelcomePageState extends ModularState<WelcomePage, WelcomeController> {
 
   userIsLogged() async {
-    var result = await welcomeController.userLogged();
+    var result = await controller.userLogged();
     if (result) {
-      Navigator.pushReplacementNamed(context, '/clients');
+      Modular.to.pushReplacementNamed('/clients');
     } 
   }
 
   Widget _signInButton() {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, '/auth');
+        Modular.to.pushNamed('/auth');
       },
       child: Container(
         width: MediaQuery.of(context).size.width,
@@ -53,7 +51,7 @@ class _WelcomePageState extends State<WelcomePage> {
   Widget _signUpButton() {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, '/auth/register');
+        Modular.to.pushNamed('/auth/register');
       },
       child: Container(
         width: MediaQuery.of(context).size.width,

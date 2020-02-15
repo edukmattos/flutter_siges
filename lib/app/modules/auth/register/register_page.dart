@@ -13,23 +13,22 @@ class RegisterPage extends StatefulWidget {
   _RegisterPageState createState() => _RegisterPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
-  final registerController = Modular.get<RegisterController>();
-
+class _RegisterPageState extends ModularState<RegisterPage, RegisterController> {
+  
   Widget _submitButton() {
     return RaisedButton(
       child: new Text("REGISTRAR", style: new TextStyle(color: Colors.white)),
       color: Colors.orange,
       elevation: 15.0,
       //shape: StadiumBorder(),
-      onPressed: registerController.isFormValid
+      onPressed: controller.isFormValid
           ? () async {
-              var result = await registerController.signUp();
+              var result = await controller.signUp();
               print(result);
               if (result) {
-                Navigator.pushReplacementNamed(context, '/clients');
+                Modular.to.pushReplacementNamed('/clients');
               } else {
-                Navigator.pushReplacementNamed(context, '/auth');
+                Modular.to.pushReplacementNamed('/auth');
               }
             }
           : null,
@@ -60,7 +59,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     name: 'email',
                     builder: (_) {
                       return TextFormField(
-                        onChanged: registerController.changeEmail,
+                        onChanged: controller.changeEmail,
                         obscureText: false,
                         maxLines: 1,
                         keyboardType: TextInputType.emailAddress,
@@ -71,7 +70,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           prefixIcon:
                               Icon(Icons.email, color: Colors.orange, size: 20),
                           helperText: ' ',
-                          errorText: registerController.validateEmail(),
+                          errorText: controller.validateEmail(),
                         ),
                       );
                     }),
@@ -82,7 +81,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     name: 'password',
                     builder: (_) {
                       return TextFormField(
-                        onChanged: registerController.changePassword,
+                        onChanged: controller.changePassword,
                         obscureText: true,
                         maxLines: 1,
                         maxLength: 10,
@@ -94,7 +93,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           prefixIcon:
                               Icon(Icons.lock, color: Colors.orange, size: 20),
                           helperText: ' ',
-                          errorText: registerController.validatePassword(),
+                          errorText: controller.validatePassword(),
                         ),
                       );
                     }),
@@ -105,7 +104,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     name: 'passwordConfirm',
                     builder: (_) {
                       return TextFormField(
-                        onChanged: registerController.changePasswordConfirm,
+                        onChanged: controller.changePasswordConfirm,
                         obscureText: true,
                         maxLines: 1,
                         maxLength: 10,
@@ -118,7 +117,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               Icon(Icons.lock, color: Colors.orange, size: 20),
                           helperText: ' ',
                           errorText:
-                              registerController.validatePasswordConfirm(),
+                              controller.validatePasswordConfirm(),
                         ),
                       );
                     }),
