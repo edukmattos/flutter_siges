@@ -1,67 +1,45 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:hasura_connect/hasura_connect.dart';
+
+import '../models/auth_model.dart';
 
 class AuthRepository extends Disposable {
 
-  String _errorMsg; 
-  bool valid = true;
-
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  
+  final HasuraConnect _hasuraConnect;
+  AuthRepository(this._hasuraConnect);
 
-  Future<dynamic> signIn(String email, String password) async { 
-    
-    try {
-      AuthResult result = (await _firebaseAuth.signInWithEmailAndPassword(
-        email: email.trim(),
-        password: password.trim()
-      ));
-      
-      var user = result.user;
+  Future<bool> signUpHasura(String email) async {
+    var insert = '''
+      mutation 
+        userAdd(
+          \$email: String
+        ) {
+            user_insert
+              (
+                objects: 
+                  {
+                    email: $email 
+                  } 
+              ) 
+              { 
+                affected_rows 
+              }
+          }
+    ''';
 
-      var tokenId = await user.getIdToken();
+    var snapshot = await _hasuraConnect.mutation(insert, variables: {
+      "email": email,
+      "user_type_id": 1,
+      "role_id": 1,
+      "user_status_id": 1,
 
-      var valid = tokenId != null;
+    });
 
-      print("valid: $valid");
+    return snapshot["data"]["user_insert"]["affected_rows"] > 0;
 
-      return valid;
-      
-    } catch (e) {
-
-      valid = false;
-
-      print("valid: $valid");
-
-      print(e.code);
-
-      switch (e.code) {
-        case 'auth/wrong-password':
-          _errorMsg = 'Ops... Senha incorreta !';
-          print(_errorMsg);
-          break;
-        
-        case 'auth/user-not-found':
-          _errorMsg = 'Ops... E-mail inexistente !';
-          print(_errorMsg);
-          break;
-
-        case 'auth/user-disabled':
-          _errorMsg = 'Ops... Conta Desabilitada !';
-          print(_errorMsg);
-          break;
-          
-        default:
-      }
-    }
-  }
-
-  Future<String> signUp(String email, String password) async {
-    AuthResult result = await _firebaseAuth.createUserWithEmailAndPassword(
-        email: email, password: password);
-    FirebaseUser user = result.user;
-    return user.uid;
   }
 
   Future<FirebaseUser> getCurrentUser() async {

@@ -2,11 +2,20 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flux_validator_dart/flux_validator_dart.dart';
 import 'package:mobx/mobx.dart';
 
+import '../../../repositories/auth_repository.dart';
+
 part 'register_controller.g.dart';
 
 class RegisterController = _RegisterBase with _$RegisterController;
 
 abstract class _RegisterBase with Store {
+
+  final AuthRepository _authRepository;  
+  _RegisterBase(this._authRepository);
+  
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
+  String _errorMsg;
 
   @observable
   String name;
@@ -56,22 +65,38 @@ abstract class _RegisterBase with Store {
 
   @action
   Future<dynamic> signUp() async { 
-    final FirebaseAuth _auth = FirebaseAuth.instance;
     print(email);
     try {
-      final FirebaseUser user = (await _auth.createUserWithEmailAndPassword(
-        email: email,
-        password: password
-      )).user;
+      AuthResult result = (await _firebaseAuth.createUserWithEmailAndPassword(
+        email: email.trim(),
+        password: password.trim()
+      ));
+      
+      var user = result.user;
 
-        var tokenId = await user.getIdToken();
+      var tokenId = await user.getIdToken();
 
-        var valid = tokenId != null;
+      var valid = tokenId != null;
 
-        return valid;
+      //_singUpHasura();clear
+
+      return valid;
 
     } catch (e) {
-      print(e);
+      print(e.code);
+
+      switch (e.code) {
+        case 'auth/email-already-in-use':
+          _errorMsg = 'Ops... E-mail indisponivel !';
+          print(_errorMsg);
+          break;
+                  
+        default:
+      }
     }
+  }
+
+  _singUpHasura() {
+    _authRepository.signUpHasura(email);
   }
 }

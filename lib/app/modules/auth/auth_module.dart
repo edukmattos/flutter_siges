@@ -1,12 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_siges/app/app_module.dart';
-import 'package:flutter_siges/app/modules/auth/auth_controller.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_siges/app/modules/auth/auth_page.dart';
-import 'package:flutter_siges/app/repositories/auth_repository.dart';
-import 'package:flutter_siges/app/widgets/custom_hasura_connect_widget.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:hasura_connect/hasura_connect.dart';
 
+import '../../repositories/auth_repository.dart';
+import '../../widgets/custom_hasura_connect_widget.dart';
+import 'auth_controller.dart';
+import 'auth_page.dart';
 import 'register/register_controller.dart';
 
 class AuthModule extends ChildModule {
@@ -14,9 +13,9 @@ class AuthModule extends ChildModule {
   List<Bind> get binds => [
         //Controllers
         Bind((i) => AuthController()),
-        Bind((i) => RegisterController()),
+        Bind((i) => RegisterController(i.get<AuthRepository>())),
         // Repositories
-        Bind((i) => AuthRepository()),
+        Bind((i) => AuthRepository(i.get<HasuraConnect>())),
 
         // Others
         Bind((i) => CustomHasuraConnectWidget.getConnect(i.get<FirebaseAuth>())),

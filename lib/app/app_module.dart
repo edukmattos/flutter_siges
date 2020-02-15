@@ -27,7 +27,7 @@ class AppModule extends MainModule {
   List<Bind> get binds => [
         //Repositories
         Bind((i) => CityRepository(i.get<HasuraConnect>())),
-        //Bind((i) => AuthRepository()),
+        Bind((i) => AuthRepository(i.get<HasuraConnect>())),
         Bind((i) => UserRepository()),
         //Controllers
         Bind((i) => WelcomeController()),
