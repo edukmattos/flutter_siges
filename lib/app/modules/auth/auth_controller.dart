@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flux_validator_dart/flux_validator_dart.dart';
 import 'package:mobx/mobx.dart';
 
@@ -9,9 +10,11 @@ class AuthController = _AuthBase with _$AuthController;
 
 abstract class _AuthBase with Store {
 
-  final AuthRepository _authRepository;
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  String _errorMsg;
+  //final AuthRepository _authRepository;
   
-  _AuthBase(this._authRepository);
+  //_AuthBase(this._authRepository);
 
   @observable
   String name;
@@ -48,7 +51,45 @@ abstract class _AuthBase with Store {
   }
 
   @action
-  signIn() { 
-    _authRepository.signIn(email, password);
+  Future<dynamic> signIn() async { 
+    try {
+      AuthResult result = (await _firebaseAuth.signInWithEmailAndPassword(
+        email: email.trim(),
+        password: password.trim()
+      ));
+      
+      var user = result.user;
+
+      var tokenId = await user.getIdToken();
+
+      var valid = tokenId != null;
+
+      print("valid: $valid");
+
+      return valid;
+      
+    } catch (e) {
+
+      print(e.code);
+
+      switch (e.code) {
+        case 'auth/wrong-password':
+          _errorMsg = 'Ops... Senha incorreta !';
+          print(_errorMsg);
+          break;
+        
+        case 'auth/user-not-found':
+          _errorMsg = 'Ops... E-mail inexistente !';
+          print(_errorMsg);
+          break;
+
+        case 'auth/user-disabled':
+          _errorMsg = 'Ops... Conta Desabilitada !';
+          print(_errorMsg);
+          break;
+          
+        default:
+      }
+    }
   } 
 }

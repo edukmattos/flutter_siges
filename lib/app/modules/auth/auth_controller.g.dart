@@ -66,6 +66,13 @@ mixin _$AuthController on _AuthBase, Store {
     }, _$passwordAtom, name: '${_$passwordAtom.name}_set');
   }
 
+  final _$signInAsyncAction = AsyncAction('signIn');
+
+  @override
+  Future<dynamic> signIn() {
+    return _$signInAsyncAction.run(() => super.signIn());
+  }
+
   final _$_AuthBaseActionController = ActionController(name: '_AuthBase');
 
   @override
@@ -93,16 +100,6 @@ mixin _$AuthController on _AuthBase, Store {
     final _$actionInfo = _$_AuthBaseActionController.startAction();
     try {
       return super.changePassword(value);
-    } finally {
-      _$_AuthBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic signIn() {
-    final _$actionInfo = _$_AuthBaseActionController.startAction();
-    try {
-      return super.signIn();
     } finally {
       _$_AuthBaseActionController.endAction(_$actionInfo);
     }

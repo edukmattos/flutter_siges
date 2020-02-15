@@ -13,7 +13,7 @@ class AuthModule extends ChildModule {
   @override
   List<Bind> get binds => [
         //Controllers
-        Bind((i) => AuthController(i.get<AuthRepository>())),
+        Bind((i) => AuthController()),
         Bind((i) => RegisterController()),
         // Repositories
         Bind((i) => AuthRepository()),
