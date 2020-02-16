@@ -78,7 +78,7 @@ abstract class _RegisterBase with Store {
 
       var valid = tokenId != null;
 
-      //_singUpHasura();clear
+      _singUpHasura();
 
       return valid;
 
