@@ -39,7 +39,7 @@ class _ClientListPageState extends State<ClientListPage> {
       body: StreamBuilder<QuerySnapshot>(
         stream: firestore.collection('messages').onSnapshot,
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          if (!snapshot.hasData) return const Text('Loading...');
+          if (!snapshot.hasData) return CircularProgressIndicator();
           final int messageCount = snapshot.data.docs.length;
           return ListView.builder(
             itemCount: messageCount,

@@ -15,23 +15,6 @@ mixin _$AuthController on _AuthBase, Store {
   bool get isFormValid =>
       (_$isFormValidComputed ??= Computed<bool>(() => super.isFormValid)).value;
 
-  final _$nameAtom = Atom(name: '_AuthBase.name');
-
-  @override
-  String get name {
-    _$nameAtom.context.enforceReadPolicy(_$nameAtom);
-    _$nameAtom.reportObserved();
-    return super.name;
-  }
-
-  @override
-  set name(String value) {
-    _$nameAtom.context.conditionallyRunInAction(() {
-      super.name = value;
-      _$nameAtom.reportChanged();
-    }, _$nameAtom, name: '${_$nameAtom.name}_set');
-  }
-
   final _$emailAtom = Atom(name: '_AuthBase.email');
 
   @override
@@ -74,16 +57,6 @@ mixin _$AuthController on _AuthBase, Store {
   }
 
   final _$_AuthBaseActionController = ActionController(name: '_AuthBase');
-
-  @override
-  dynamic changeName(String value) {
-    final _$actionInfo = _$_AuthBaseActionController.startAction();
-    try {
-      return super.changeName(value);
-    } finally {
-      _$_AuthBaseActionController.endAction(_$actionInfo);
-    }
-  }
 
   @override
   dynamic changeEmail(String value) {

@@ -1,4 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flushbar/flushbar.dart';
+import 'package:flushbar/flushbar_helper.dart';
 import 'package:flux_validator_dart/flux_validator_dart.dart';
 import 'package:mobx/mobx.dart';
 
@@ -11,17 +13,13 @@ class AuthController = _AuthBase with _$AuthController;
 abstract class _AuthBase with Store {
 
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  String _errorMsg;
-  //final AuthRepository _authRepository;
-  
+
+  //final AuthRepository _authRepository;  
   //_AuthBase(this._authRepository);
 
-  @observable
-  String name;
+  String errorTitle;
+  String errorMsg;
   
-  @action
-  changeName(String value) => name = value;
-
   @observable
   String email;
   
@@ -71,25 +69,17 @@ abstract class _AuthBase with Store {
     } catch (e) {
 
       print(e.code);
+      errorTitle = "Ops ...";
 
-      switch (e.code) {
-        case 'auth/wrong-password':
-          _errorMsg = 'Ops... Senha incorreta !';
-          print(_errorMsg);
-          break;
-        
-        case 'auth/user-not-found':
-          _errorMsg = 'Ops... E-mail inexistente !';
-          print(_errorMsg);
-          break;
-
-        case 'auth/user-disabled':
-          _errorMsg = 'Ops... Conta Desabilitada !';
-          print(_errorMsg);
-          break;
-          
-        default:
+      if (e.code == 'auth/wrong-password') {
+        errorMsg = 'Senha incorreta !';
+      } else if (e.code == 'auth/user-not-found') {
+        errorMsg = 'E-mail inexistente !';
+      } else if (e.code == 'auth/user-disabled') {
+        errorMsg = 'Conta Desabilitada !';
       }
+
+      return false;
     }
   } 
 }
