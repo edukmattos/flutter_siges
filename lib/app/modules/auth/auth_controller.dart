@@ -76,7 +76,7 @@ abstract class _AuthBase with Store {
       } else if (e.code == 'auth/user-not-found') {
         errorMsg = 'E-mail inexistente !';
       } else if (e.code == 'auth/user-disabled') {
-        errorMsg = 'Conta Desabilitada !';
+        errorMsg = 'Conta desabilitada !';
       }
 
       return false;

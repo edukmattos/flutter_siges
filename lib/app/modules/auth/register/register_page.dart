@@ -1,3 +1,4 @@
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -28,12 +29,35 @@ class _RegisterPageState extends ModularState<RegisterPage, RegisterController> 
               if (result) {
                 Modular.to.pushReplacementNamed('/clients');
               } else {
-                Modular.to.pushReplacementNamed('/auth');
+                _flushBar();
+                //Modular.to.pushReplacementNamed('/auth');
               }
             }
           : null,
     );
   }
+
+  Widget _flushBar() {
+    return Flushbar(
+      title: controller.errorTitle,
+      message: controller.errorMsg,
+      flushbarPosition: FlushbarPosition.BOTTOM,
+      flushbarStyle: FlushbarStyle.FLOATING,
+      //showProgressIndicator: true,
+      //progressIndicatorController: controller.errorMsg,
+      //progressIndicatorBackgroundColor: Colors.grey[800],
+      margin: EdgeInsets.all(0),
+      borderRadius: 0,
+      backgroundColor: Colors.red,
+      icon: Icon(
+        Icons.error_outline,
+        size: 30.0,
+        color: Colors.white,
+        ),
+      duration: Duration(seconds: 3),
+    )..show(context);
+  }
+
 
   @override
   Widget build(BuildContext context) {

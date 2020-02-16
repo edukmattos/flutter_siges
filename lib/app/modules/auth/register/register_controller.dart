@@ -15,8 +15,9 @@ abstract class _RegisterBase with Store {
   
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
-  String _errorMsg;
-
+  String errorTitle;
+  String errorMsg;
+  
   @observable
   String name;
   
@@ -85,14 +86,18 @@ abstract class _RegisterBase with Store {
     } catch (e) {
       print(e.code);
 
+      errorTitle = "Ops ...";
+
       switch (e.code) {
         case 'auth/email-already-in-use':
-          _errorMsg = 'Ops... E-mail indisponivel !';
-          print(_errorMsg);
+          errorMsg = 'E-mail indisponivel !';
+          print(errorMsg);
           break;
                   
         default:
       }
+
+      return false;
     }
   }
 
