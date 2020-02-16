@@ -25,4 +25,10 @@ mixin _$CityController on _CityBase, Store {
       _$citiesAtom.reportChanged();
     }, _$citiesAtom, name: '${_$citiesAtom.name}_set');
   }
+
+  @override
+  String toString() {
+    final string = 'cities: ${cities.toString()}';
+    return '{$string}';
+  }
 }

@@ -83,6 +83,7 @@ class _RegisterPageState extends ModularState<RegisterPage, RegisterController> 
                     name: 'email',
                     builder: (_) {
                       return TextFormField(
+                        autofocus: true,
                         onChanged: controller.changeEmail,
                         obscureText: false,
                         maxLines: 1,

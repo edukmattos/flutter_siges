@@ -37,4 +37,10 @@ mixin _$SplashController on _SplashBase, Store {
       _$_SplashBaseActionController.endAction(_$actionInfo);
     }
   }
+
+  @override
+  String toString() {
+    final string = 'value: ${value.toString()}';
+    return '{$string}';
+  }
 }

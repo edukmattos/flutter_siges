@@ -1,6 +1,3 @@
-import 'package:flutter_siges/app/modules/city/city_module.dart';
-import 'package:flutter_siges/app/repositories/auth_repository.dart';
-import 'package:flutter_siges/app/repositories/city_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:hasura_connect/hasura_connect.dart';
@@ -12,10 +9,12 @@ import 'config/hasura_config.dart';
 import 'modules/auth/auth_module.dart';
 import 'modules/auth/register/register_module.dart';
 import 'modules/client/client_module.dart';
-import 'pages/splash/splash_controller.dart';
 import 'modules/splash/splash_module.dart';
-import 'pages/welcome/welcome_controller.dart';
 import 'modules/welcome/welcome_module.dart';
+import 'pages/splash/splash_controller.dart';
+import 'pages/welcome/welcome_controller.dart';
+import 'repositories/auth_repository.dart';
+import 'repositories/city_repository.dart';
 import 'repositories/user_repository.dart';
 
 class AppModule extends MainModule {

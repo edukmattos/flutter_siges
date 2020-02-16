@@ -1,10 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flushbar/flushbar.dart';
-import 'package:flushbar/flushbar_helper.dart';
 import 'package:flux_validator_dart/flux_validator_dart.dart';
 import 'package:mobx/mobx.dart';
-
-import '../../repositories/auth_repository.dart';
 
 part 'auth_controller.g.dart';
 

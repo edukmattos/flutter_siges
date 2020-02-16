@@ -1,9 +1,7 @@
+import 'package:cloud_firestore_all/cloud_firestore_all.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
-import 'package:cloud_firestore_all/cloud_firestore_all.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class ClientListPage extends StatefulWidget {
   final String title;

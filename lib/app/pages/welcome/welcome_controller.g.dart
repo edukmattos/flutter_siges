@@ -37,4 +37,10 @@ mixin _$WelcomeController on _WelcomeBase, Store {
       _$_WelcomeBaseActionController.endAction(_$actionInfo);
     }
   }
+
+  @override
+  String toString() {
+    final string = 'value: ${value.toString()}';
+    return '{$string}';
+  }
 }

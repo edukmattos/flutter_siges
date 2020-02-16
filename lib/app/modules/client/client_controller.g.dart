@@ -37,4 +37,10 @@ mixin _$ClientController on _ClientBase, Store {
       _$_ClientBaseActionController.endAction(_$actionInfo);
     }
   }
+
+  @override
+  String toString() {
+    final string = 'value: ${value.toString()}';
+    return '{$string}';
+  }
 }
