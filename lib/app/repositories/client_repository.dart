@@ -7,7 +7,7 @@ class ClientRepository extends Disposable {
   final HasuraConnect _hasuraConnect;
   ClientRepository(this._hasuraConnect);
 
-  Future<List<ClientModel>> getClients() async {
+  Stream<List<ClientModel>> getClients() {
     var select = '''
       query getClients {
         clients {
@@ -19,11 +19,11 @@ class ClientRepository extends Disposable {
       }
     ''';
 
-    var snapshot = await _hasuraConnect.query(select);
+    var snapshot = _hasuraConnect.subscription(select);
 
     print("snapshot: $snapshot");
     
-    return ClientModel.fromJsonList(snapshot['data']['clients'] as List);
+    return snapshot.map((data) => ClientModel.fromJsonList(data['data']['clients']));
   }
 
   //dispose will be called automatically
