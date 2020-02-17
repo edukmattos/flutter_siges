@@ -12,14 +12,14 @@ mixin _$ClientController on _ClientBase, Store {
   final _$clientsAtom = Atom(name: '_ClientBase.clients');
 
   @override
-  List<ClientModel> get clients {
+  ObservableStream<List<ClientModel>> get clients {
     _$clientsAtom.context.enforceReadPolicy(_$clientsAtom);
     _$clientsAtom.reportObserved();
     return super.clients;
   }
 
   @override
-  set clients(List<ClientModel> value) {
+  set clients(ObservableStream<List<ClientModel>> value) {
     _$clientsAtom.context.conditionallyRunInAction(() {
       super.clients = value;
       _$clientsAtom.reportChanged();

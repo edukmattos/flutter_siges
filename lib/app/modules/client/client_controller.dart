@@ -10,10 +10,10 @@ abstract class _ClientBase with Store {
   final ClientRepository _cityRepository;
 
   _ClientBase(this._cityRepository) {
-    _cityRepository.getClients().then((data) => clients = data);
+    clients = ObservableStream(_cityRepository.getClients());
   }
 
   @observable
-  List<ClientModel> clients = [];  
+  ObservableStream<List<ClientModel>> clients;  
 }
   
