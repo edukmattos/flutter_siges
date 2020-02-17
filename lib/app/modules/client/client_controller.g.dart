@@ -9,38 +9,26 @@ part of 'client_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$ClientController on _ClientBase, Store {
-  final _$valueAtom = Atom(name: '_ClientBase.value');
+  final _$clientsAtom = Atom(name: '_ClientBase.clients');
 
   @override
-  int get value {
-    _$valueAtom.context.enforceReadPolicy(_$valueAtom);
-    _$valueAtom.reportObserved();
-    return super.value;
+  List<ClientModel> get clients {
+    _$clientsAtom.context.enforceReadPolicy(_$clientsAtom);
+    _$clientsAtom.reportObserved();
+    return super.clients;
   }
 
   @override
-  set value(int value) {
-    _$valueAtom.context.conditionallyRunInAction(() {
-      super.value = value;
-      _$valueAtom.reportChanged();
-    }, _$valueAtom, name: '${_$valueAtom.name}_set');
-  }
-
-  final _$_ClientBaseActionController = ActionController(name: '_ClientBase');
-
-  @override
-  void increment() {
-    final _$actionInfo = _$_ClientBaseActionController.startAction();
-    try {
-      return super.increment();
-    } finally {
-      _$_ClientBaseActionController.endAction(_$actionInfo);
-    }
+  set clients(List<ClientModel> value) {
+    _$clientsAtom.context.conditionallyRunInAction(() {
+      super.clients = value;
+      _$clientsAtom.reportChanged();
+    }, _$clientsAtom, name: '${_$clientsAtom.name}_set');
   }
 
   @override
   String toString() {
-    final string = 'value: ${value.toString()}';
+    final string = 'clients: ${clients.toString()}';
     return '{$string}';
   }
 }

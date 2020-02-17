@@ -5,7 +5,6 @@ import 'package:hasura_connect/hasura_connect.dart';
 class CityRepository extends Disposable {
 
   final HasuraConnect _hasuraConnect;
-
   CityRepository(this._hasuraConnect);
 
   Future<List<CityModel>> getCities() async {

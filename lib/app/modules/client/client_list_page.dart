@@ -1,66 +1,93 @@
-import 'package:cloud_firestore_all/cloud_firestore_all.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+
+import '../../models/client_model.dart';
+import 'client_controller.dart';
 
 class ClientListPage extends StatefulWidget {
   final String title;
-  const ClientListPage({Key key, this.title = "Client List", this.firestore})
-      : super(key: key);
-  final Firestore firestore;
+  const ClientListPage({Key key, this.title = "Client List"}) : super(key: key);
 
   @override
   _ClientListPageState createState() => _ClientListPageState();
 }
 
-class _ClientListPageState extends State<ClientListPage> {
-  final Firestore firestore = firestoreInstance;
-  CollectionReference get messages => firestore.collection('messages');
+class _ClientListPageState
+    extends ModularState<ClientListPage, ClientController> {
+  
+  Widget clientsListView(BuildContext context, AsyncSnapshot snapshot) {
+    return Observer(
+      name: 'clientsListObserver',
+      builder: (BuildContext context) {
+        return ListView.builder(
+          itemCount: controller.clients.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Column(
+              children: <Widget>[
+                ListTile(
+                  title: Text(controller.clients[index].name),
+                  subtitle: Text(controller.clients[index].email),
+                ),
+                Divider(
+                  height: 1.0,
+                )
+              ]
+            );
+          }
+        );
+      },
+    );
+  }
+
+  Widget progressIndicator() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Center(
+          child: CircularProgressIndicator(
+            backgroundColor: Colors.cyan,
+            strokeWidth: 5,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Future<List<ClientModel>> _getData() async {
+    var clients = controller.clients;
+    return clients;
+  }
 
   @override
   Widget build(BuildContext context) {
+    var futureBuilder = FutureBuilder(
+      future: _getData(),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.none:
+            return new Text('Sem resultado');
+          case ConnectionState.waiting:
+            return progressIndicator();
+          case ConnectionState.done:
+            return clientsListView(context, snapshot);
+          default:
+            if (snapshot.hasError)
+              return new Text('Error: ${snapshot.error}');
+            else
+              return clientsListView(context, snapshot);
+        }
+      },
+    );
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.power_settings_new),
-            onPressed: () async {
-              var user = await FirebaseAuth.instance.currentUser();
-              user.delete();
-              
-              Modular.to.pushReplacementNamed('/');
-            },
-          ),        
-        ],
       ),
-      body: StreamBuilder<QuerySnapshot>(
-        stream: firestore.collection('messages').onSnapshot,
-        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          if (!snapshot.hasData) return CircularProgressIndicator();
-          final int messageCount = snapshot.data.docs.length;
-          return ListView.builder(
-            itemCount: messageCount,
-            itemBuilder: (_, int index) {
-              final DocumentSnapshot document = snapshot.data.docs[index];
-              final dynamic message = document['message'];
-              return ListTile(
-                title: Text(
-                  message != null
-                      ? message.toString()
-                      : '<No message retrieved>',
-                ),
-                subtitle: Text('Message ${index + 1} of $messageCount'),
-                trailing: Text(
-                  DateTime.fromMillisecondsSinceEpoch(
-                    document['created_at']?.millisecondsSinceEpoch ?? 0,
-                    isUtc: true,
-                  ).toString(),
-                ),
-              );
-            },
-          );
-        },
+      body: Container(
+        child: futureBuilder,
       ),
     );
   }

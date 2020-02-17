@@ -5,12 +5,12 @@ import 'package:hasura_connect/hasura_connect.dart';
 import '../config/hasura_config.dart';
 
 class CustomHasuraConnectWidget {
-  static HasuraConnect getConnect(FirebaseAuth auth) {
+  static HasuraConnect getConnect(FirebaseAuth firebaseAuth) {
     return HasuraConnect(
       hasura_config_url,
       token: (_) async {
 
-        var user = await auth.currentUser();
+        var user = await firebaseAuth.currentUser();
 
         var token = await user.getIdToken(refresh: true);
 

@@ -1,3 +1,4 @@
+import 'package:flutter_siges/app/repositories/client_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:hasura_connect/hasura_connect.dart';
@@ -25,6 +26,7 @@ class AppModule extends MainModule {
   @override
   List<Bind> get binds => [
         //Repositories
+        Bind((i) => ClientRepository(i.get<HasuraConnect>())),
         Bind((i) => CityRepository(i.get<HasuraConnect>())),
         Bind((i) => AuthRepository(i.get<HasuraConnect>())),
         Bind((i) => UserRepository()),

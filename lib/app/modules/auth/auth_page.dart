@@ -38,6 +38,53 @@ class _AuthPageState extends ModularState<AuthPage, AuthController> {
   }
 
   Widget _signInGoogle() {
+    return Container(
+      height: 50,
+      margin: EdgeInsets.symmetric(vertical: 20),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+      ),
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            flex: 1,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(5),
+                    topLeft: Radius.circular(5)),
+              ),
+              alignment: Alignment.center,
+              child: Image(
+                image: AssetImage("assets/images/google_logo.png"),
+                height: 30.0),
+            ),
+          ),
+          Expanded(
+            flex: 5,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.red,
+                borderRadius: BorderRadius.only(
+                    bottomRight: Radius.circular(5),
+                    topRight: Radius.circular(5)),
+              ),
+              alignment: Alignment.center,
+              child: Text('Entrar com Google',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w400)),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+
+  Widget _signInGoogleX() {
     return OutlineButton(
       splashColor: Colors.grey,
       onPressed: () {},
@@ -105,8 +152,8 @@ class _AuthPageState extends ModularState<AuthPage, AuthController> {
               children: <Widget>[
                 Image.asset(
                   'assets/images/logo.jpeg',
-                  width: 250,
-                  height: 250,
+                  width: 200,
+                  height: 200,
                 ),
                 SizedBox(
                   height: 40,
