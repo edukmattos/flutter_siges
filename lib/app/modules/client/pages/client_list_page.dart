@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
-import 'client_controller.dart';
+
+import '../client_controller.dart';
 
 class ClientListPage extends StatefulWidget {
   final String title;
@@ -25,7 +26,9 @@ class _ClientListPageState
         elevation: 4.0,
         icon: Icon(Icons.add),
         label: Text('Add a Client'),
-        onPressed: (){},
+        onPressed: (){
+          Modular.to.pushReplacementNamed('/clients/new');
+        },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
