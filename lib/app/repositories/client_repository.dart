@@ -9,7 +9,7 @@ class ClientRepository extends Disposable {
 
   Stream<List<ClientModel>> getClients() {
     var select = '''
-      query getClients {
+      subscription getClients {
         clients {
           id
           ein_ssa

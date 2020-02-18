@@ -29,6 +29,7 @@ class _ClientListPageState
         builder: (BuildContext context) {
 
           if (controller.clients.hasError) {
+            print(controller.clients.hasError);
             return Center(
               child: Text(
                 'Erro a realizar a pesquisa !'
@@ -50,8 +51,12 @@ class _ClientListPageState
           return ListView.builder(
             itemCount: controller.clients.value.length,
             itemBuilder: (BuildContext context, int index) {
-              return Text(
-                controller.clients.value[index].name
+              return ListTile(
+                leading: Icon(Icons.access_alarm),
+                title: Text(controller.clients.value[index].name),
+                subtitle: Text(controller.clients.value[index].email),
+                isThreeLine: true,
+                trailing: Icon(Icons.account_circle),
               );
             }
           );
