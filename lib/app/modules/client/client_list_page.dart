@@ -24,6 +24,29 @@ class _ClientListPageState
       appBar: AppBar(
         title: Text(widget.title),
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        elevation: 4.0,
+        icon: Icon(Icons.add),
+        label: Text('Add a Client'),
+        onPressed: (){},
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomAppBar(
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            IconButton(
+              icon: Icon(Icons.menu),
+              onPressed: () {},
+            ),
+            IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {},
+            ),
+          ]
+        )
+      ),
       body: Observer(
         name: 'clientListObserver',
         builder: (BuildContext context) {
