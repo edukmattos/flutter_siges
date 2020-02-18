@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'client_controller.dart';
+part of 'client_new_controller.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,31 +8,14 @@ part of 'client_controller.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$ClientController on _ClientBase, Store {
+mixin _$ClientNewController on _ClientNewBase, Store {
   Computed<bool> _$isFormValidComputed;
 
   @override
   bool get isFormValid =>
       (_$isFormValidComputed ??= Computed<bool>(() => super.isFormValid)).value;
 
-  final _$clientsAtom = Atom(name: '_ClientBase.clients');
-
-  @override
-  ObservableStream<List<ClientModel>> get clients {
-    _$clientsAtom.context.enforceReadPolicy(_$clientsAtom);
-    _$clientsAtom.reportObserved();
-    return super.clients;
-  }
-
-  @override
-  set clients(ObservableStream<List<ClientModel>> value) {
-    _$clientsAtom.context.conditionallyRunInAction(() {
-      super.clients = value;
-      _$clientsAtom.reportChanged();
-    }, _$clientsAtom, name: '${_$clientsAtom.name}_set');
-  }
-
-  final _$nameAtom = Atom(name: '_ClientBase.name');
+  final _$nameAtom = Atom(name: '_ClientNewBase.name');
 
   @override
   String get name {
@@ -49,7 +32,7 @@ mixin _$ClientController on _ClientBase, Store {
     }, _$nameAtom, name: '${_$nameAtom.name}_set');
   }
 
-  final _$einSsaAtom = Atom(name: '_ClientBase.einSsa');
+  final _$einSsaAtom = Atom(name: '_ClientNewBase.einSsa');
 
   @override
   String get einSsa {
@@ -66,7 +49,7 @@ mixin _$ClientController on _ClientBase, Store {
     }, _$einSsaAtom, name: '${_$einSsaAtom.name}_set');
   }
 
-  final _$emailAtom = Atom(name: '_ClientBase.email');
+  final _$emailAtom = Atom(name: '_ClientNewBase.email');
 
   @override
   String get email {
@@ -83,49 +66,50 @@ mixin _$ClientController on _ClientBase, Store {
     }, _$emailAtom, name: '${_$emailAtom.name}_set');
   }
 
-  final _$clientSaveAsyncAction = AsyncAction('clientSave');
+  final _$saveAsyncAction = AsyncAction('save');
 
   @override
-  Future<bool> clientSave() {
-    return _$clientSaveAsyncAction.run(() => super.clientSave());
+  Future<bool> save() {
+    return _$saveAsyncAction.run(() => super.save());
   }
 
-  final _$_ClientBaseActionController = ActionController(name: '_ClientBase');
+  final _$_ClientNewBaseActionController =
+      ActionController(name: '_ClientNewBase');
 
   @override
   dynamic changeName(String value) {
-    final _$actionInfo = _$_ClientBaseActionController.startAction();
+    final _$actionInfo = _$_ClientNewBaseActionController.startAction();
     try {
       return super.changeName(value);
     } finally {
-      _$_ClientBaseActionController.endAction(_$actionInfo);
+      _$_ClientNewBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   dynamic changeEinSsa(String value) {
-    final _$actionInfo = _$_ClientBaseActionController.startAction();
+    final _$actionInfo = _$_ClientNewBaseActionController.startAction();
     try {
       return super.changeEinSsa(value);
     } finally {
-      _$_ClientBaseActionController.endAction(_$actionInfo);
+      _$_ClientNewBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   dynamic changeEmail(String value) {
-    final _$actionInfo = _$_ClientBaseActionController.startAction();
+    final _$actionInfo = _$_ClientNewBaseActionController.startAction();
     try {
       return super.changeEmail(value);
     } finally {
-      _$_ClientBaseActionController.endAction(_$actionInfo);
+      _$_ClientNewBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   String toString() {
     final string =
-        'clients: ${clients.toString()},name: ${name.toString()},einSsa: ${einSsa.toString()},email: ${email.toString()},isFormValid: ${isFormValid.toString()}';
+        'name: ${name.toString()},einSsa: ${einSsa.toString()},email: ${email.toString()},isFormValid: ${isFormValid.toString()}';
     return '{$string}';
   }
 }

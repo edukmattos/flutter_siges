@@ -1,24 +1,18 @@
-import 'package:flutter_siges/app/models/client_model.dart';
 import 'package:flutter_siges/app/repositories/client_repository.dart';
 import 'package:flux_validator_dart/flux_validator_dart.dart';
 import 'package:mobx/mobx.dart';
 
-part 'client_controller.g.dart';
+part 'client_edit_controller.g.dart';
 
-class ClientController = _ClientBase with _$ClientController;
+class ClientEditController = _ClientEditBase with _$ClientEditController;
 
-abstract class _ClientBase with Store {
+abstract class _ClientEditBase with Store {
   final ClientRepository _clientRepository;
-
+  final String clientId;
   String errorTitle;
   String errorMsg;
 
-  _ClientBase(this._clientRepository) {
-    clients = ObservableStream(_clientRepository.getClients());
-  }
-
-  @observable
-  ObservableStream<List<ClientModel>> clients;  
+  _ClientEditBase(this._clientRepository, this.clientId);
 
   @observable
   String name;
@@ -65,6 +59,5 @@ abstract class _ClientBase with Store {
     if (validatorEmail(email)) return "Invalido.";
     return null;
   }
-
 }
   

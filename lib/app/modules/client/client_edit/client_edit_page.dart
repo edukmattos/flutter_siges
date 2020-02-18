@@ -1,36 +1,34 @@
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import 'register_controller.dart';
+import 'client_edit_controller.dart';
 
-class RegisterPage extends StatefulWidget {
+class ClientEditPage extends StatefulWidget {
   final String title;
-  const RegisterPage({Key key, this.title = "Register"}) : super(key: key);
+  const ClientEditPage({Key key, this.title = "Client Edit"}) : super(key: key);
 
   @override
-  _RegisterPageState createState() => _RegisterPageState();
+  _ClientEditPageState createState() => _ClientEditPageState();
 }
 
-class _RegisterPageState extends ModularState<RegisterPage, RegisterController> {
-  
+class _ClientEditPageState extends ModularState<ClientEditPage, ClientEditController> {
   Widget _submitButton() {
     return RaisedButton(
-      child: new Text("REGISTRAR", style: new TextStyle(color: Colors.white)),
+      child: new Text("Confirmar", style: new TextStyle(color: Colors.white)),
       color: Colors.orange,
       elevation: 15.0,
       //shape: StadiumBorder(),
       onPressed: controller.isFormValid
           ? () async {
-              var result = await controller.signUp();
-              print(result);
+            print("Client Saved !");
+              var result = await controller.clientSave();
+              ////print(result);
               if (result) {
-                Modular.to.pushReplacementNamed('/clients');
+              Modular.to.pushReplacementNamed('/clients');
               } else {
                 _flushBar();
-                //Modular.to.pushReplacementNamed('/auth');
               }
             }
           : null,
@@ -53,15 +51,17 @@ class _RegisterPageState extends ModularState<RegisterPage, RegisterController> 
         Icons.error_outline,
         size: 30.0,
         color: Colors.white,
-        ),
+      ),
       duration: Duration(seconds: 3),
     )..show(context);
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          title: Text(widget.title),
+        ),
         backgroundColor: Colors.white,
         body: Stack(children: <Widget>[
           Container(
@@ -71,16 +71,54 @@ class _RegisterPageState extends ModularState<RegisterPage, RegisterController> 
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Image.asset(
-                  'assets/images/logo.jpeg',
-                  width: 250,
-                  height: 250,
-                ),
+                Observer(
+                    name: 'einSsaObserver',
+                    builder: (_) {
+                      return TextFormField(
+                        autofocus: true,
+                        onChanged: controller.changeEinSsa,
+                        obscureText: false,
+                        maxLines: 1,
+                        keyboardType: TextInputType.number,
+                        cursorColor: Colors.orange,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'CPF/CNPJ',
+                          prefixIcon:
+                              Icon(Icons.email, color: Colors.orange, size: 20),
+                          helperText: ' ',
+                          errorText: controller.validateEinSsa(),
+                        ),
+                      );
+                    }),
                 SizedBox(
-                  height: 40,
+                  height: 10,
                 ),
                 Observer(
-                    name: 'email',
+                    name: 'nameObserver',
+                    builder: (_) {
+                      return TextFormField(
+                        autofocus: false,
+                        onChanged: controller.changeName,
+                        obscureText: false,
+                        maxLines: 1,
+                        keyboardType: TextInputType.emailAddress,
+                        cursorColor: Colors.orange,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Nome',
+                          prefixIcon:
+                              Icon(Icons.face, color: Colors.orange, size: 20),
+                          helperText: ' ',
+                          errorText: controller.validateName(),
+                        ),
+                      );
+                    }),
+                SizedBox(
+                  height: 10,
+                ),
+                Observer(
+                    name: 'emailObserver',
                     builder: (_) {
                       return TextFormField(
                         autofocus: true,
@@ -101,53 +139,6 @@ class _RegisterPageState extends ModularState<RegisterPage, RegisterController> 
                     }),
                 SizedBox(
                   height: 10,
-                ),
-                Observer(
-                    name: 'password',
-                    builder: (_) {
-                      return TextFormField(
-                        onChanged: controller.changePassword,
-                        obscureText: true,
-                        maxLines: 1,
-                        maxLength: 10,
-                        keyboardType: TextInputType.text,
-                        cursorColor: Colors.orange,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Senha',
-                          prefixIcon:
-                              Icon(Icons.lock, color: Colors.orange, size: 20),
-                          helperText: ' ',
-                          errorText: controller.validatePassword(),
-                        ),
-                      );
-                    }),
-                SizedBox(
-                  height: 10,
-                ),
-                Observer(
-                    name: 'passwordConfirm',
-                    builder: (_) {
-                      return TextFormField(
-                        onChanged: controller.changePasswordConfirm,
-                        obscureText: true,
-                        maxLines: 1,
-                        maxLength: 10,
-                        keyboardType: TextInputType.text,
-                        cursorColor: Colors.orange,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Confirmar Senha',
-                          prefixIcon:
-                              Icon(Icons.lock, color: Colors.orange, size: 20),
-                          helperText: ' ',
-                          errorText:
-                              controller.validatePasswordConfirm(),
-                        ),
-                      );
-                    }),
-                SizedBox(
-                  height: 20,
                 ),
                 Observer(
                     name: 'submitButtonObserver',

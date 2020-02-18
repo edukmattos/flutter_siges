@@ -180,7 +180,7 @@ class _AuthPageState extends ModularState<AuthPage, AuthController> {
                   height: 20,
                 ),
                 Observer(
-                    name: 'submitButton',
+                    name: 'submitButtonObserver',
                     builder: (_) {
                       return _submitButton();
                     }),

@@ -14,7 +14,7 @@ class CityModule extends ChildModule {
         // Repositories
         Bind((i) => CityRepository(i.get<HasuraConnect>())),
         // Others
-        Bind((i) => HasuraConnect(hasura_config_url)),
+        //Bind((i) => HasuraConnect(hasura_config_url)),
       ];
 
   @override

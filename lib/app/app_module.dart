@@ -10,10 +10,10 @@ import 'config/hasura_config.dart';
 import 'modules/auth/auth_module.dart';
 import 'modules/auth/register/register_module.dart';
 import 'modules/client/client_module.dart';
+import 'modules/splash/splash_controller.dart';
 import 'modules/splash/splash_module.dart';
+import 'modules/welcome/welcome_controller.dart';
 import 'modules/welcome/welcome_module.dart';
-import 'pages/splash/splash_controller.dart';
-import 'pages/welcome/welcome_controller.dart';
 import 'repositories/auth_repository.dart';
 import 'repositories/city_repository.dart';
 import 'repositories/user_repository.dart';
@@ -27,8 +27,8 @@ class AppModule extends MainModule {
   List<Bind> get binds => [
         //Repositories
         Bind((i) => ClientRepository(i.get<HasuraConnect>())),
-        Bind((i) => CityRepository(i.get<HasuraConnect>())),
-        Bind((i) => AuthRepository(i.get<HasuraConnect>())),
+        //Bind((i) => CityRepository(i.get<HasuraConnect>())),
+        //Bind((i) => AuthRepository(i.get<HasuraConnect>())),
         Bind((i) => UserRepository()),
         //Controllers
         Bind((i) => WelcomeController()),

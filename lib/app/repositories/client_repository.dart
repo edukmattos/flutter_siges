@@ -26,7 +26,26 @@ class ClientRepository extends Disposable {
     return snapshot.map((data) => ClientModel.fromJsonList(data['data']['clients']));
   }
 
-  Future<bool> clientSave(String einSsa, String name, String email) async {
+  Future<ClientModel> getClientById(String clientId) async {
+    var select = '''
+      subscription getClients {
+        clients {
+          id
+          ein_ssa
+          name
+          email
+        }
+      }
+    ''';
+
+    var snapshot = _hasuraConnect.subscription(select);
+
+    print("snapshot: $snapshot");
+    
+    //return snapshot.map((data) => ClientModel.fromJsonList(data['data']['clients']));
+  }
+
+  Future<bool> save(String einSsa, String name, String email) async {
     var insert = '''
       mutation clientSave(\$einSsa: String, \$name: String, \$email: String) {
         insert_clients(objects: {ein_ssa: \$einSsa, name: \$name, email: \$email}) {
@@ -35,7 +54,7 @@ class ClientRepository extends Disposable {
       }
     ''';
     var snapshot = await _hasuraConnect.mutation(insert, variables: {
-        "einSaa": einSsa,
+        "einSsa": einSsa,
         "name": name,
         "email": email
       }

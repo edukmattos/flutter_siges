@@ -1,25 +1,19 @@
-import 'package:flutter_siges/app/models/client_model.dart';
 import 'package:flutter_siges/app/repositories/client_repository.dart';
 import 'package:flux_validator_dart/flux_validator_dart.dart';
 import 'package:mobx/mobx.dart';
 
-part 'client_controller.g.dart';
+part 'client_new_controller.g.dart';
 
-class ClientController = _ClientBase with _$ClientController;
+class ClientNewController = _ClientNewBase with _$ClientNewController;
 
-abstract class _ClientBase with Store {
+abstract class _ClientNewBase with Store {
+  
   final ClientRepository _clientRepository;
-
   String errorTitle;
   String errorMsg;
-
-  _ClientBase(this._clientRepository) {
-    clients = ObservableStream(_clientRepository.getClients());
-  }
-
-  @observable
-  ObservableStream<List<ClientModel>> clients;  
-
+  
+  _ClientNewBase(this._clientRepository);
+  
   @observable
   String name;
   
@@ -39,7 +33,7 @@ abstract class _ClientBase with Store {
   changeEmail(String value) => email = value;
 
   @action
-  Future<bool> clientSave() async {
+  Future<bool> save() async {
     return await _clientRepository.save(einSsa, name, email);
   }
 
@@ -67,4 +61,3 @@ abstract class _ClientBase with Store {
   }
 
 }
-  
