@@ -57,6 +57,11 @@ class _ClientListPageState
                 subtitle: Text(controller.clients.value[index].email),
                 isThreeLine: true,
                 trailing: Icon(Icons.account_circle),
+                //selected: false,
+                onLongPress: (){
+                  print("onLongPress");
+                },
+                onTap: (){},
               );
             }
           );
