@@ -1,10 +1,7 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-
-import '../../models/client_model.dart';
+import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 import 'client_controller.dart';
 
 class ClientListPage extends StatefulWidget {
@@ -62,7 +59,15 @@ class _ClientListPageState
 
           if (controller.clients.value == null) {
             return Center(
-              child: CircularProgressIndicator(),
+              child: LiquidCircularProgressIndicator(
+                value: 0.25, // Defaults to 0.5.
+                valueColor: AlwaysStoppedAnimation(Colors.pink), // Defaults to the current Theme's accentColor.
+                backgroundColor: Colors.white, // Defaults to the current Theme's backgroundColor.
+                borderColor: Colors.red,
+                borderWidth: 5.0,
+                direction: Axis.horizontal, // The direction the liquid moves (Axis.vertical = bottom to top, Axis.horizontal = left to right). Defaults to Axis.vertical.
+                center: Text("Loading..."),
+              )
             );
           }
 
