@@ -26,6 +26,41 @@ class ClientRepository extends Disposable {
     return snapshot.map((data) => ClientModel.fromJsonList(data['data']['clients']));
   }
 
+  Future<bool> clientSave(String einSsa, String name, String email) async {
+    var insert = '''
+      mutation clientSave(\$einSsa: String, \$name: String, \$email: String) {
+        insert_clients(objects: {ein_ssa: \$einSsa, name: \$name, email: \$email}) {
+          affected_rows
+        }
+      }
+    ''';
+    var snapshot = await _hasuraConnect.mutation(insert, variables: {
+        "einSaa": einSsa,
+        "name": name,
+        "email": email
+      }
+    );
+
+    return snapshot["data"]["affected_rows"] > 0;
+  }
+
+  Future<bool> clientUpdate(String einSsa, String name, String email) async {
+    var insert = '''
+      mutation clientSave(\$einSsa: String, \$name: String, \$email: String) {
+        insert_clients(objects: {ein_ssa: \$einSsa, name: \$name, email: \$email}) {
+          affected_rows
+        }
+      }
+    ''';
+    var snapshot = await _hasuraConnect.mutation(insert, variables: {
+        "einSaa": einSsa,
+        "name": name,
+        "email": email
+      }
+    );
+
+    return snapshot["data"]["affected_rows"] > 0;
+  }
   //dispose will be called automatically
   @override
   void dispose() {}

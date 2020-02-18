@@ -8,13 +8,13 @@ part 'client_controller.g.dart';
 class ClientController = _ClientBase with _$ClientController;
 
 abstract class _ClientBase with Store {
-  final ClientRepository _cityRepository;
+  final ClientRepository _clientRepository;
 
   String errorTitle;
   String errorMsg;
 
-  _ClientBase(this._cityRepository) {
-    clients = ObservableStream(_cityRepository.getClients());
+  _ClientBase(this._clientRepository) {
+    clients = ObservableStream(_clientRepository.getClients());
   }
 
   @observable
@@ -39,13 +39,14 @@ abstract class _ClientBase with Store {
   changeEmail(String value) => email = value;
 
   @action
-  signUp() {
-
+  Future<bool> clientSave() async {
+    return await _clientRepository.clientSave(einSsa, name, email);
   }
 
   @computed
   bool get isFormValid {
-    return validateEinSsa() == null && validateName() == null && validateEmail() == null;
+    return true;
+    //return validateEinSsa() == null && validateName() == null && validateEmail() == null;
   }
   
   String validateEinSsa() {
