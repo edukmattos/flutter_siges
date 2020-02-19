@@ -60,7 +60,7 @@ flutter:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
   assets:
-    - assets/images/logo.jpeg
+    - assets/images/logo.png
     - assets/images/powered_by.png
     - assets/images/google_logo.png
 

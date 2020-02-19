@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_siges/app/config/app_config.dart';
 
 import 'welcome_controller.dart';
 
@@ -103,7 +104,7 @@ class _WelcomePageState extends ModularState<WelcomePage, WelcomeController> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         Image.asset(
-          'assets/images/logo.jpeg',
+          'assets/images/logo.png',
           width: 250,
           height: 250,
         ),
@@ -114,27 +115,12 @@ class _WelcomePageState extends ModularState<WelcomePage, WelcomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue,
+      backgroundColor: appBackgroundColor,
       body: Stack(
         children: <Widget>[
           Container(
             padding: EdgeInsets.symmetric(horizontal: 20),
             height: MediaQuery.of(context).size.height,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(5)),
-              boxShadow: <BoxShadow>[
-                BoxShadow(
-                    color: Colors.grey.shade200,
-                    offset: Offset(2, 4),
-                    blurRadius: 5,
-                    spreadRadius: 2)
-              ],
-              //gradient: const LinearGradient(
-              //  begin: Alignment.topCenter,
-              //  end: Alignment.bottomCenter,
-              //  colors: [Color(0xfffbb448), Color(0xffe46b10)],
-              //),
-            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,

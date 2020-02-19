@@ -8,7 +8,7 @@ class RegisterModule extends ChildModule {
   @override
   List<Bind> get binds => [
         // Controllers
-        Bind((i) => RegisterController(i.get<AuthRepository>())),
+        //Bind((i) => RegisterController(i.get<AuthRepository>())),
       ];
 
   @override

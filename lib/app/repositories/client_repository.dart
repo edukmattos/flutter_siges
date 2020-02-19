@@ -53,14 +53,20 @@ class ClientRepository extends Disposable {
         }
       }
     ''';
-    var snapshot = await _hasuraConnect.mutation(insert, variables: {
+    await _hasuraConnect.mutation(insert, variables: {
         "einSsa": einSsa,
         "name": name,
         "email": email
       }
     );
 
-    return snapshot["data"]["affected_rows"] > 0;
+    //print("return  ${snapshot["data"]["affected_rows"]}");
+
+    //return snapshot["data"]["affected_rows"] > 0;
+
+    return true;
+
+    
   }
 
   Future<bool> clientUpdate(String einSsa, String name, String email) async {

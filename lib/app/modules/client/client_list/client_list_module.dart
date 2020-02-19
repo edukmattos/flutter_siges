@@ -1,9 +1,9 @@
-import 'package:flutter_siges/app/modules/client/client_list/client_list_controller.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_siges/app/modules/client/client_list/client_list_page.dart';
-import 'package:hasura_connect/hasura_connect.dart';
 
 import '../../../repositories/client_repository.dart';
+import '../../../modules/client/client_list/client_list_page.dart';
+import 'client_list_controller.dart';
+
 
 class ClientListModule extends ChildModule {
   @override

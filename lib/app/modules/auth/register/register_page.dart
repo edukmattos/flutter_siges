@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_siges/app/config/app_config.dart';
 
 import 'register_controller.dart';
 
@@ -62,7 +63,7 @@ class _RegisterPageState extends ModularState<RegisterPage, RegisterController> 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: appBackgroundColor,
         body: Stack(children: <Widget>[
           Container(
             padding: EdgeInsets.all(18),
@@ -72,7 +73,7 @@ class _RegisterPageState extends ModularState<RegisterPage, RegisterController> 
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Image.asset(
-                  'assets/images/logo.jpeg',
+                  'assets/images/logo.png',
                   width: 250,
                   height: 250,
                 ),

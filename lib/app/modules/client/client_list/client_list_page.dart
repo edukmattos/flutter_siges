@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_siges/app/config/app_config.dart';
 import 'package:flutter_siges/app/modules/client/client_list/client_list_controller.dart';
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 
 class ClientListPage extends StatefulWidget {
   final String title;
-  const ClientListPage({Key key, this.title = "ClientList"}) : super(key: key);
+  const ClientListPage({Key key, this.title = appClientListPageTag}) : super(key: key);
 
   @override
   _ClientListPageState createState() => _ClientListPageState();

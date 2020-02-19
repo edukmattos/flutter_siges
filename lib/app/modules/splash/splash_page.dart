@@ -71,7 +71,7 @@ class SplashPageState extends ModularState<SplashPage, SplashController>
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Image.asset(
-                'assets/images/logo.jpeg',
+                'assets/images/logo.png',
                 width: animation.value * 250,
                 height: animation.value * 250,
               ),

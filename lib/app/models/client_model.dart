@@ -5,7 +5,7 @@ ClientModel clientModelFromJson(String str) => ClientModel.fromJson(json.decode(
 String clientModelToJson(ClientModel data) => json.encode(data.toJson());
 
 class ClientModel {
-    int id;
+    String id;
     String einSsa;
     String name;
     String email;

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_siges/app/config/app_config.dart';
 
 import 'auth_controller.dart';
 
@@ -16,6 +17,15 @@ class AuthPage extends StatefulWidget {
 
 class _AuthPageState extends ModularState<AuthPage, AuthController> {
   
+  Widget _logo() {
+    return CircleAvatar(
+      backgroundColor: Colors.transparent,
+      radius: bigRadius,
+      child: appLogo,
+    );
+  }
+
+
   Widget _submitButton() {
     return RaisedButton(
       child: new Text("ENTRAR", style: new TextStyle(color: Colors.white)),
@@ -108,7 +118,7 @@ class _AuthPageState extends ModularState<AuthPage, AuthController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: appBackgroundColor,
       body: Stack(
         children: <Widget>[
           Container(
@@ -118,11 +128,7 @@ class _AuthPageState extends ModularState<AuthPage, AuthController> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Image.asset(
-                  'assets/images/logo.jpeg',
-                  width: 200,
-                  height: 200,
-                ),
+                _logo(),
                 SizedBox(
                   height: 40,
                 ),

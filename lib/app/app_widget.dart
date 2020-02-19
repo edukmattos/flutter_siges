@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_siges/app/config/app_config.dart';
 
 class AppWidget extends StatelessWidget {
   @override
@@ -7,9 +8,9 @@ class AppWidget extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       navigatorKey: Modular.navigatorKey,
-      title: 'Flutter Slidy',
+      title: appTitle,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: appBackgroundColor,
       ),
       initialRoute: '/',
       onGenerateRoute: Modular.generateRoute,

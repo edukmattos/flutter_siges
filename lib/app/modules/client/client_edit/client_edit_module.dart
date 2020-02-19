@@ -16,7 +16,7 @@ class ClientEditModule extends ChildModule {
         // Repositories
         Bind((i) => ClientRepository(i.get<HasuraConnect>())),
         // Controllers
-        Bind((i) => ClientEditController(i.get<ClientRepository>(), clientId)),
+        Bind((i) => ClientEditController(i.get<ClientRepository>(), i.params["clientId"]), singleton: false),
       ];
 
   @override
