@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'splash_controller.dart';
+part of 'material_edit_controller.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,8 +8,8 @@ part of 'splash_controller.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$SplashController on _SplashBase, Store {
-  final _$valueAtom = Atom(name: '_SplashBase.value');
+mixin _$MaterialEditController on _MaterialEditBase, Store {
+  final _$valueAtom = Atom(name: '_MaterialEditBase.value');
 
   @override
   int get value {
@@ -26,15 +26,16 @@ mixin _$SplashController on _SplashBase, Store {
     }, _$valueAtom, name: '${_$valueAtom.name}_set');
   }
 
-  final _$_SplashBaseActionController = ActionController(name: '_SplashBase');
+  final _$_MaterialEditBaseActionController =
+      ActionController(name: '_MaterialEditBase');
 
   @override
   void increment() {
-    final _$actionInfo = _$_SplashBaseActionController.startAction();
+    final _$actionInfo = _$_MaterialEditBaseActionController.startAction();
     try {
       return super.increment();
     } finally {
-      _$_SplashBaseActionController.endAction(_$actionInfo);
+      _$_MaterialEditBaseActionController.endAction(_$actionInfo);
     }
   }
 

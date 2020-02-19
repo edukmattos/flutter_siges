@@ -78,7 +78,7 @@ class ClientRepository extends Disposable {
       }
     ''';
     var snapshot = await _hasuraConnect.mutation(insert, variables: {
-        "einSaa": einSsa,
+        "einSsa": einSsa,
         "name": name,
         "email": email
       }
