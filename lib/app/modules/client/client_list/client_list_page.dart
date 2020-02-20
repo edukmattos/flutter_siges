@@ -80,9 +80,11 @@ class _ClientListPageState extends ModularState<ClientListPage, ClientListContro
               return ListTile(
                 leading: Icon(Icons.access_alarm),
                 title: Text(controller.clients.value[index].name),
-                subtitle: Text(controller.clients.value[index].email),
+                subtitle: Text(controller.clients.value[index].einSsa +'\n'+ controller.clients.value[index].email),
                 isThreeLine: true,
-                trailing: Icon(Icons.account_circle),
+                trailing: Icon(Icons.keyboard_arrow_right),
+                dense: false,
+                contentPadding: EdgeInsets.all(0.0),
                 //selected: false,
                 onLongPress: (){
                   print("onLongPress");
