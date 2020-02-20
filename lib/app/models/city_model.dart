@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final cityModel = cityModelFromJson(jsonString);
-
 import 'dart:convert';
 
 class CityModel {
@@ -27,9 +23,9 @@ class CityModel {
         String id,
         String description,
         String stateId,
-        String createdAt,
-        String updatedAt,
-        String deletedAt,
+        DateTime createdAt,
+        DateTime updatedAt,
+        DateTime deletedAt,
         State state,
     }) => 
         CityModel(

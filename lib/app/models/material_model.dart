@@ -5,20 +5,20 @@ class MaterialModel {
     final String code;
     final String description;
     final String materialUnitId;
-    final MaterialUnit materialUnit;
     final DateTime createdAt;
     final DateTime updatedAt;
     final DateTime deletedAt;
+    final MaterialUnit materialUnit;
 
     MaterialModel({
         this.id,
         this.code,
         this.description,
         this.materialUnitId,
-        this.materialUnit,
         this.createdAt,
         this.updatedAt,
         this.deletedAt,
+         this.materialUnit,
     });
 
     MaterialModel copyWith({
@@ -26,20 +26,20 @@ class MaterialModel {
         String code,
         String description,
         String materialUnitId,
-        MaterialUnit materialUnit,
         DateTime createdAt,
         DateTime updatedAt,
         DateTime deletedAt,
+        MaterialUnit materialUnit,
     }) => 
         MaterialModel(
             id: id ?? this.id,
             code: code ?? this.code,
             description: description ?? this.description,
             materialUnitId: materialUnitId ?? this.materialUnitId,
-            materialUnit: materialUnit ?? this.materialUnit,
             createdAt: createdAt ?? this.createdAt,
             updatedAt: updatedAt ?? this.updatedAt,
             deletedAt: deletedAt ?? this.deletedAt,
+            materialUnit: materialUnit ?? this.materialUnit,
         );
 
     factory MaterialModel.fromJson(String str) => MaterialModel.fromMap(json.decode(str));
@@ -51,10 +51,10 @@ class MaterialModel {
         code: json["code"],
         description: json["description"],
         materialUnitId: json["material_unit_id"],
-        materialUnit: MaterialUnit.fromMap(json["material_unit"]),
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
         deletedAt: DateTime.parse(json["deleted_at"]),
+        materialUnit: MaterialUnit.fromMap(json["material_unit"]),
     );
 
     Map<String, dynamic> toMap() => {
@@ -62,10 +62,10 @@ class MaterialModel {
         "code": code,
         "description": description,
         "material_unit_id": materialUnitId,
+        "created_at": createdAt,
+        "updated_at": updatedAt,
+        "deleted_at": deletedAt,
         "material_unit": materialUnit.toMap(),
-        "created_at": createdAt.toIso8601String(),
-        "updated_at": updatedAt.toIso8601String(),
-        "deleted_at": deletedAt.toIso8601String(),
     };
 
     static List<MaterialModel> fromJsonList(List list) {
