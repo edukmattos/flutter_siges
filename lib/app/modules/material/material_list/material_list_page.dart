@@ -19,6 +19,9 @@ class _MaterialListPageState extends ModularState<MaterialListPage, MaterialList
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0.1,
+        backgroundColor: appBackgroundColor,
+        centerTitle: true,
         title: Text(widget.title),
       ),
       floatingActionButton: FloatingActionButton.extended(
@@ -78,9 +81,14 @@ class _MaterialListPageState extends ModularState<MaterialListPage, MaterialList
               return ListTile(
                 leading: Icon(Icons.access_alarm),
                 title: Text(controller.materials.value[index].description),
-                subtitle: Text(controller.materials.value[index].materialUnit.code),
+                subtitle: Text(controller.materials.value[index].code),
                 isThreeLine: true,
-                trailing: Icon(Icons.account_circle),
+                trailing: Chip(
+                  label: Text(controller.materials.value[index].materialUnit.code),
+                  avatar: CircleAvatar(
+                    child: Text("3")
+                  ),
+                ),
                 //selected: false,
                 onLongPress: (){
                   print("onLongPress");
