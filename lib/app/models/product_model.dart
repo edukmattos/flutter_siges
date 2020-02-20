@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final productModel = productModelFromJson(jsonString);
-
 import 'dart:convert';
 
 class ProductModel {
@@ -10,9 +6,9 @@ class ProductModel {
     final String description;
     final String productTypeId;
     final ProductType productType;
-    final DateTime createdAt;
-    final DateTime updatedAt;
-    final DateTime deletedAt;
+    final String createdAt;
+    final String updatedAt;
+    final String deletedAt;
 
     ProductModel({
         this.id,
@@ -31,9 +27,9 @@ class ProductModel {
         String description,
         String productTypeId,
         ProductType productType,
-        DateTime createdAt,
-        DateTime updatedAt,
-        DateTime deletedAt,
+        String createdAt,
+        String updatedAt,
+        String deletedAt,
     }) => 
         ProductModel(
             id: id ?? this.id,
@@ -56,9 +52,9 @@ class ProductModel {
         description: json["description"],
         productTypeId: json["product_type_id"],
         productType: ProductType.fromMap(json["product_type"]),
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
-        deletedAt: DateTime.parse(json["deleted_at"]),
+        createdAt: json["created_at"],
+        updatedAt: json["updated_at"],
+        deletedAt: json["deleted_at"],
     );
 
     Map<String, dynamic> toMap() => {
@@ -67,9 +63,9 @@ class ProductModel {
         "description": description,
         "product_type_id": productTypeId,
         "product_type": productType.toMap(),
-        "created_at": createdAt.toIso8601String(),
-        "updated_at": updatedAt.toIso8601String(),
-        "deleted_at": deletedAt.toIso8601String(),
+        "created_at": createdAt,
+        "updated_at": updatedAt,
+        "deleted_at": deletedAt,
     };
 
     static List<ProductModel> fromJsonList(List list) {

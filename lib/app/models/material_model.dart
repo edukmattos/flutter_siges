@@ -5,9 +5,9 @@ class MaterialModel {
     final String code;
     final String description;
     final String materialUnitId;
-    final DateTime createdAt;
-    final DateTime updatedAt;
-    final DateTime deletedAt;
+    final String createdAt;
+    final String updatedAt;
+    final String deletedAt;
     final MaterialUnit materialUnit;
 
     MaterialModel({
@@ -26,9 +26,9 @@ class MaterialModel {
         String code,
         String description,
         String materialUnitId,
-        DateTime createdAt,
-        DateTime updatedAt,
-        DateTime deletedAt,
+        String createdAt,
+        String updatedAt,
+        String deletedAt,
         MaterialUnit materialUnit,
     }) => 
         MaterialModel(
@@ -51,9 +51,9 @@ class MaterialModel {
         code: json["code"],
         description: json["description"],
         materialUnitId: json["material_unit_id"],
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
-        deletedAt: DateTime.parse(json["deleted_at"]),
+        createdAt: json["created_at"],
+        updatedAt: json["updated_at"],
+        deletedAt: json["deleted_at"],
         materialUnit: MaterialUnit.fromMap(json["material_unit"]),
     );
 

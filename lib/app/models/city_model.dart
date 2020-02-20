@@ -23,9 +23,9 @@ class CityModel {
         String id,
         String description,
         String stateId,
-        DateTime createdAt,
-        DateTime updatedAt,
-        DateTime deletedAt,
+        String createdAt,
+        String updatedAt,
+        String deletedAt,
         State state,
     }) => 
         CityModel(

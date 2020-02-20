@@ -78,7 +78,7 @@ class _MaterialListPageState extends ModularState<MaterialListPage, MaterialList
               return ListTile(
                 leading: Icon(Icons.access_alarm),
                 title: Text(controller.materials.value[index].description),
-                subtitle: Text(controller.materials.value[index].description),
+                subtitle: Text(controller.materials.value[index].materialUnit.code),
                 isThreeLine: true,
                 trailing: Icon(Icons.account_circle),
                 //selected: false,
