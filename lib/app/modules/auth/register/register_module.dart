@@ -1,7 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
 
-import '../../../repositories/auth_repository.dart';
-import 'register_controller.dart';
 import 'register_page.dart';
 
 class RegisterModule extends ChildModule {

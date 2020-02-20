@@ -1,41 +1,59 @@
 import 'dart:convert';
 
+CityModel cityModelFromJson(String str) => CityModel.fromMap(json.decode(str));
+
+String cityModelToJson(CityModel data) => json.encode(data.toMap());
+
 class CityModel {
-    int id;
-    String description;
-    Regions regions;
+    final String id;
+    final String description;
+    final DateTime createdAt;
+    final DateTime updatedAt;
+    final DateTime deletedAt;
+    final State state;
 
     CityModel({
         this.id,
         this.description,
-        this.regions,
+        this.createdAt,
+        this.updatedAt,
+        this.deletedAt,
+        this.state,
     });
 
     CityModel copyWith({
-        int id,
+        String id,
         String description,
-        Regions regions,
+        DateTime createdAt,
+        DateTime updatedAt,
+        DateTime deletedAt,
+        State state,
     }) => 
         CityModel(
             id: id ?? this.id,
             description: description ?? this.description,
-            regions: regions ?? this.regions,
+            createdAt: createdAt ?? this.createdAt,
+            updatedAt: updatedAt ?? this.updatedAt,
+            deletedAt: deletedAt ?? this.deletedAt,
+            state: state ?? this.state,
         );
-
-    factory CityModel.fromJson(String str) => CityModel.fromMap(json.decode(str));
-
-    String toJson() => json.encode(toMap());
 
     factory CityModel.fromMap(Map<String, dynamic> json) => CityModel(
         id: json["id"],
         description: json["description"],
-        regions: Regions.fromMap(json["regions"]),
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
+        deletedAt: DateTime.parse(json["deleted_at"]),
+        state: State.fromMap(json["state"]),
     );
 
     Map<String, dynamic> toMap() => {
         "id": id,
         "description": description,
-        "regions": regions.toMap(),
+        "created_at": createdAt.toIso8601String(),
+        "updated_at": updatedAt.toIso8601String(),
+        "deleted_at": deletedAt.toIso8601String(),
+        "state": state.toMap(),
     };
 
     static List<CityModel> fromJsonList(List list) {
@@ -46,33 +64,29 @@ class CityModel {
     }
 }
 
-class Regions {
-    int id;
+class State {
+    String id;
     String code;
     String description;
 
-    Regions({
+    State({
         this.id,
         this.code,
         this.description,
     });
 
-    Regions copyWith({
-        int id,
+    State copyWith({
+        String id,
         String code,
         String description,
     }) => 
-        Regions(
+        State(
             id: id ?? this.id,
             code: code ?? this.code,
             description: description ?? this.description,
         );
 
-    factory Regions.fromJson(String str) => Regions.fromMap(json.decode(str));
-
-    String toJson() => json.encode(toMap());
-
-    factory Regions.fromMap(Map<String, dynamic> json) => Regions(
+    factory State.fromMap(Map<String, dynamic> json) => State(
         id: json["id"],
         code: json["code"],
         description: json["description"],

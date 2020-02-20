@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'city_controller.dart';
+part of 'city_list_controller.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,18 +8,18 @@ part of 'city_controller.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$CityController on _CityBase, Store {
-  final _$citiesAtom = Atom(name: '_CityBase.cities');
+mixin _$CityListController on _CityListBase, Store {
+  final _$citiesAtom = Atom(name: '_CityListBase.cities');
 
   @override
-  List<CityModel> get cities {
+  ObservableStream<List<CityModel>> get cities {
     _$citiesAtom.context.enforceReadPolicy(_$citiesAtom);
     _$citiesAtom.reportObserved();
     return super.cities;
   }
 
   @override
-  set cities(List<CityModel> value) {
+  set cities(ObservableStream<List<CityModel>> value) {
     _$citiesAtom.context.conditionallyRunInAction(() {
       super.cities = value;
       _$citiesAtom.reportChanged();

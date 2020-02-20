@@ -14,7 +14,7 @@ class MaterialRepository extends Disposable {
           id
           code
           description
-          material_unit {
+          material_units {
             id
             code
             description
