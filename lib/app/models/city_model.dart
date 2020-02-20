@@ -1,20 +1,22 @@
+// To parse this JSON data, do
+//
+//     final cityModel = cityModelFromJson(jsonString);
+
 import 'dart:convert';
-
-CityModel cityModelFromJson(String str) => CityModel.fromMap(json.decode(str));
-
-String cityModelToJson(CityModel data) => json.encode(data.toMap());
 
 class CityModel {
     final String id;
     final String description;
-    final DateTime createdAt;
-    final DateTime updatedAt;
-    final DateTime deletedAt;
+    final String stateId;
+    final String createdAt;
+    final String updatedAt;
+    final String deletedAt;
     final State state;
 
     CityModel({
         this.id,
         this.description,
+        this.stateId,
         this.createdAt,
         this.updatedAt,
         this.deletedAt,
@@ -24,35 +26,43 @@ class CityModel {
     CityModel copyWith({
         String id,
         String description,
-        DateTime createdAt,
-        DateTime updatedAt,
-        DateTime deletedAt,
+        String stateId,
+        String createdAt,
+        String updatedAt,
+        String deletedAt,
         State state,
     }) => 
         CityModel(
             id: id ?? this.id,
             description: description ?? this.description,
+            stateId: stateId ?? this.stateId,
             createdAt: createdAt ?? this.createdAt,
             updatedAt: updatedAt ?? this.updatedAt,
             deletedAt: deletedAt ?? this.deletedAt,
             state: state ?? this.state,
         );
 
+    factory CityModel.fromJson(String str) => CityModel.fromMap(json.decode(str));
+
+    String toJson() => json.encode(toMap());
+
     factory CityModel.fromMap(Map<String, dynamic> json) => CityModel(
         id: json["id"],
         description: json["description"],
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
-        deletedAt: DateTime.parse(json["deleted_at"]),
+        stateId: json["state_id"],
+        createdAt: json["created_at"],
+        updatedAt: json["updated_at"],
+        deletedAt: json["deleted_at"],
         state: State.fromMap(json["state"]),
     );
 
     Map<String, dynamic> toMap() => {
         "id": id,
         "description": description,
-        "created_at": createdAt.toIso8601String(),
-        "updated_at": updatedAt.toIso8601String(),
-        "deleted_at": deletedAt.toIso8601String(),
+        "state_id": stateId,
+        "created_at": createdAt,
+        "updated_at": updatedAt,
+        "deleted_at": deletedAt,
         "state": state.toMap(),
     };
 
@@ -65,9 +75,9 @@ class CityModel {
 }
 
 class State {
-    String id;
-    String code;
-    String description;
+    final String id;
+    final String code;
+    final String description;
 
     State({
         this.id,
@@ -85,6 +95,10 @@ class State {
             code: code ?? this.code,
             description: description ?? this.description,
         );
+
+    factory State.fromJson(String str) => State.fromMap(json.decode(str));
+
+    String toJson() => json.encode(toMap());
 
     factory State.fromMap(Map<String, dynamic> json) => State(
         id: json["id"],

@@ -58,7 +58,7 @@ abstract class _AuthBase with Store {
 
       var valid = tokenId != null;
 
-      print("valid: $valid");
+      //print("valid: $valid");
 
       return valid;
       

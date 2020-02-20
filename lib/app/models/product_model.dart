@@ -1,57 +1,61 @@
+// To parse this JSON data, do
+//
+//     final productModel = productModelFromJson(jsonString);
+
 import 'dart:convert';
 
-class MaterialModel {
+class ProductModel {
     final String id;
     final String code;
     final String description;
-    final String materialUnitId;
-    final MaterialUnit materialUnit;
+    final String productTypeId;
+    final ProductType productType;
     final DateTime createdAt;
     final DateTime updatedAt;
     final DateTime deletedAt;
 
-    MaterialModel({
+    ProductModel({
         this.id,
         this.code,
         this.description,
-        this.materialUnitId,
-        this.materialUnit,
+        this.productTypeId,
+        this.productType,
         this.createdAt,
         this.updatedAt,
         this.deletedAt,
     });
 
-    MaterialModel copyWith({
+    ProductModel copyWith({
         String id,
         String code,
         String description,
-        String materialUnitId,
-        MaterialUnit materialUnit,
+        String productTypeId,
+        ProductType productType,
         DateTime createdAt,
         DateTime updatedAt,
         DateTime deletedAt,
     }) => 
-        MaterialModel(
+        ProductModel(
             id: id ?? this.id,
             code: code ?? this.code,
             description: description ?? this.description,
-            materialUnitId: materialUnitId ?? this.materialUnitId,
-            materialUnit: materialUnit ?? this.materialUnit,
+            productTypeId: productTypeId ?? this.productTypeId,
+            productType: productType ?? this.productType,
             createdAt: createdAt ?? this.createdAt,
             updatedAt: updatedAt ?? this.updatedAt,
             deletedAt: deletedAt ?? this.deletedAt,
         );
 
-    factory MaterialModel.fromJson(String str) => MaterialModel.fromMap(json.decode(str));
+    factory ProductModel.fromJson(String str) => ProductModel.fromMap(json.decode(str));
 
     String toJson() => json.encode(toMap());
 
-    factory MaterialModel.fromMap(Map<String, dynamic> json) => MaterialModel(
+    factory ProductModel.fromMap(Map<String, dynamic> json) => ProductModel(
         id: json["id"],
         code: json["code"],
         description: json["description"],
-        materialUnitId: json["material_unit_id"],
-        materialUnit: MaterialUnit.fromMap(json["material_unit"]),
+        productTypeId: json["product_type_id"],
+        productType: ProductType.fromMap(json["product_type"]),
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
         deletedAt: DateTime.parse(json["deleted_at"]),
@@ -61,48 +65,48 @@ class MaterialModel {
         "id": id,
         "code": code,
         "description": description,
-        "material_unit_id": materialUnitId,
-        "material_unit": materialUnit.toMap(),
+        "product_type_id": productTypeId,
+        "product_type": productType.toMap(),
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
         "deleted_at": deletedAt.toIso8601String(),
     };
 
-    static List<MaterialModel> fromJsonList(List list) {
+    static List<ProductModel> fromJsonList(List list) {
       if (list == null) return null;
       return list
-        .map<MaterialModel>((item) => MaterialModel.fromMap(item))
+        .map<ProductModel>((item) => ProductModel.fromMap(item))
         .toList();
     }
 }
 
-class MaterialUnit {
+class ProductType {
     final String id;
     final String code;
     final String description;
 
-    MaterialUnit({
+    ProductType({
         this.id,
         this.code,
         this.description,
     });
 
-    MaterialUnit copyWith({
+    ProductType copyWith({
         String id,
         String code,
         String description,
     }) => 
-        MaterialUnit(
+        ProductType(
             id: id ?? this.id,
             code: code ?? this.code,
             description: description ?? this.description,
         );
 
-    factory MaterialUnit.fromJson(String str) => MaterialUnit.fromMap(json.decode(str));
+    factory ProductType.fromJson(String str) => ProductType.fromMap(json.decode(str));
 
     String toJson() => json.encode(toMap());
 
-    factory MaterialUnit.fromMap(Map<String, dynamic> json) => MaterialUnit(
+    factory ProductType.fromMap(Map<String, dynamic> json) => ProductType(
         id: json["id"],
         code: json["code"],
         description: json["description"],

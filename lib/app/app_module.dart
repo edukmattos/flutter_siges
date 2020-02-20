@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_siges/app/modules/city/city_list/city_list_module.dart';
 import 'package:flutter_siges/app/modules/material/material_list/material_list_module.dart';
+import 'package:flutter_siges/app/modules/product/product_list/product_list_module.dart';
 import 'package:flutter_siges/app/repositories/city_repository.dart';
 import 'package:flutter_siges/app/repositories/material_repository.dart';
+import 'package:flutter_siges/app/repositories/product_repository.dart';
 import 'package:hasura_connect/hasura_connect.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -32,6 +34,7 @@ class AppModule extends MainModule {
         Bind((i) => MaterialRepository(i.get<HasuraConnect>())),
         Bind((i) => ClientRepository(i.get<HasuraConnect>())),
         Bind((i) => CityRepository(i.get<HasuraConnect>())),
+        Bind((i) => ProductRepository(i.get<HasuraConnect>())),
         //Bind((i) => AuthRepository(i.get<HasuraConnect>())),
         Bind((i) => UserRepository()),
         //Controllers
@@ -61,6 +64,8 @@ class AppModule extends MainModule {
             module: MaterialListModule(), transition: TransitionType.rightToLeft),
         Router('/cities',
             module: CityListModule(), transition: TransitionType.rightToLeft),
+        Router('/products',
+            module: ProductListModule(), transition: TransitionType.rightToLeft),
       ];
 
   @override

@@ -3,17 +3,17 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../config/app_config.dart';
-import 'city_list_controller.dart';
+import 'product_list_controller.dart';
 
-class CityListPage extends StatefulWidget {
+class ProductListPage extends StatefulWidget {
   final String title;
-  const CityListPage({Key key, this.title = appCityListPageTag}) : super(key: key);
+  const ProductListPage({Key key, this.title = appProductListPageTag}) : super(key: key);
 
   @override
-  _CityListPageState createState() => _CityListPageState();
+  _ProductListPageState createState() => _ProductListPageState();
 }
 
-class _CityListPageState extends ModularState<CityListPage, CityListController> {
+class _ProductListPageState extends ModularState<ProductListPage, ProductListController> {
   
   @override
   Widget build(BuildContext context) {
@@ -24,9 +24,9 @@ class _CityListPageState extends ModularState<CityListPage, CityListController> 
       floatingActionButton: FloatingActionButton.extended(
         elevation: 4.0,
         icon: Icon(Icons.add),
-        label: Text('Add a City'),
+        label: Text('Add a Product'),
         onPressed: (){
-          Modular.to.pushReplacementNamed('/cities/new');
+          Modular.to.pushReplacementNamed('/products/new');
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -47,11 +47,11 @@ class _CityListPageState extends ModularState<CityListPage, CityListController> 
         )
       ),
       body: Observer(
-        name: 'cityListObserver',
+        name: 'productListObserver',
         builder: (BuildContext context) {
 
-          if (controller.cities.hasError) {
-            print(controller.cities.hasError);
+          if (controller.products.hasError) {
+            print(controller.products.hasError);
             return Center(
               child: Text(
                 'Erro a realizar a pesquisa !'
@@ -59,7 +59,7 @@ class _CityListPageState extends ModularState<CityListPage, CityListController> 
             );
           }
 
-          if (controller.cities.value == null) {
+          if (controller.products.value == null) {
             return Center(
               child: CircularProgressIndicator(
                 backgroundColor: Colors.red,
@@ -68,17 +68,17 @@ class _CityListPageState extends ModularState<CityListPage, CityListController> 
           }
 
           // Ordenacao
-          controller.cities.value.sort(
-            (city1, city2) => city1.description.toUpperCase().compareTo(city2.description.toUpperCase())
+          controller.products.value.sort(
+            (product1, product2) => product1.description.toUpperCase().compareTo(product2.description.toUpperCase())
           );
 
           return ListView.builder(
-            itemCount: controller.cities.value.length,
+            itemCount: controller.products.value.length,
             itemBuilder: (BuildContext context, int index) {
               return ListTile(
                 leading: Icon(Icons.access_alarm),
-                title: Text(controller.cities.value[index].description),
-                subtitle: Text(controller.cities.value[index].state.description),
+                title: Text(controller.products.value[index].description),
+                subtitle: Text(controller.products.value[index].description),
                 isThreeLine: true,
                 trailing: Icon(Icons.account_circle),
                 //selected: false,

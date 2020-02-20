@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_siges/app/config/app_config.dart';
-import 'package:flutter_siges/app/modules/material/material_list/material_list_controller.dart';
+
+import '../../../config/app_config.dart';
+import 'material_list_controller.dart';
 
 class MaterialListPage extends StatefulWidget {
   final String title;
-  const MaterialListPage({Key key, this.title = appMaterialListPageTag})
-      : super(key: key);
+  const MaterialListPage({Key key, this.title = appMaterialListPageTag}) : super(key: key);
 
   @override
   _MaterialListPageState createState() => _MaterialListPageState();
@@ -49,6 +49,7 @@ class _MaterialListPageState extends ModularState<MaterialListPage, MaterialList
       body: Observer(
         name: 'materialListObserver',
         builder: (BuildContext context) {
+
           if (controller.materials.hasError) {
             print(controller.materials.hasError);
             return Center(
@@ -77,7 +78,7 @@ class _MaterialListPageState extends ModularState<MaterialListPage, MaterialList
               return ListTile(
                 leading: Icon(Icons.access_alarm),
                 title: Text(controller.materials.value[index].description),
-                subtitle: Text(controller.materials.value[index].code),
+                subtitle: Text(controller.materials.value[index].description),
                 isThreeLine: true,
                 trailing: Icon(Icons.account_circle),
                 //selected: false,

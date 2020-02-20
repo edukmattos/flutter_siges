@@ -25,7 +25,6 @@ class _AuthPageState extends ModularState<AuthPage, AuthController> {
     );
   }
 
-
   Widget _submitButton() {
     return RaisedButton(
       child: new Text("ENTRAR", style: new TextStyle(color: Colors.white)),
@@ -37,7 +36,7 @@ class _AuthPageState extends ModularState<AuthPage, AuthController> {
               var result = await controller.signIn();
               print("result: $result");
               if (result) {
-                Modular.to.pushReplacementNamed('/materials');
+                Modular.to.pushReplacementNamed('/products');
               } else {
                 _flushBar();
                 //Modular.to.pushReplacementNamed('/auth');

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 const appClientListPageTag = 'Clientes';
 const appMaterialListPageTag = 'Materiais';
 const appCityListPageTag = 'Cidades';
+const appProductListPageTag = 'Produtos';
 const homePageTag = 'Home Page';
 
 // Colors

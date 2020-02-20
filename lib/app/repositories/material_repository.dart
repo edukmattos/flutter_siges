@@ -14,7 +14,8 @@ class MaterialRepository extends Disposable {
           id
           code
           description
-          material_units {
+          material_unit_id
+          material_unit {
             id
             code
             description
@@ -28,7 +29,7 @@ class MaterialRepository extends Disposable {
 
     var snapshot = _hasuraConnect.subscription(select);
 
-    print("snapshot: $snapshot");
+    //print("snapshot: $snapshot");
     
     return snapshot.map((data) => MaterialModel.fromJsonList(data['data']['materials']));
   }

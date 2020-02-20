@@ -1,20 +1,21 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_siges/app/models/city_model.dart';
+import 'package:flutter_siges/app/models/product_model.dart';
 import 'package:hasura_connect/hasura_connect.dart';
 
-class CityRepository extends Disposable {
+class ProductRepository extends Disposable {
 
   final HasuraConnect _hasuraConnect;
-  CityRepository(this._hasuraConnect);
+  ProductRepository(this._hasuraConnect);
 
-  Stream<List<CityModel>> getCities() {
+  Stream<List<ProductModel>> getProducts() {
     var select = '''
-      subscription getCities {
-        cities {
+      subscription getProducts {
+        products {
           id
+          code
           description
-          state_id
-          state {
+          product_type_id
+          product_type {
             id
             code
             description
@@ -30,7 +31,7 @@ class CityRepository extends Disposable {
 
     //print("snapshot: $snapshot");
     
-    return snapshot.map((data) => CityModel.fromJsonList(data['data']['cities']));
+    return snapshot.map((data) => ProductModel.fromJsonList(data['data']['Products']));
   }
   
 
