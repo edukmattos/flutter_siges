@@ -45,8 +45,12 @@ abstract class _ClientNewBase with Store {
   
   String validateEinSsa() {
     if (validatorRequired(einSsa)) return "Obrigatorio.";
-    if (validatorCpf(einSsa)) return "Invalido.";
-    return null;
+    if (einSsa.length >= 0 && einSsa.length <= 11) {
+      if (validatorCpf(einSsa)) return "CFP invalido.";
+    } else if (einSsa.length >= 12 && einSsa.length <= 14) {
+      if (validatorCnpj(einSsa)) return "CNPJ invalido.";
+    }
+    return null; 
   }
   
   String validateName() {
