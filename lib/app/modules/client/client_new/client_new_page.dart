@@ -2,6 +2,7 @@ import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_siges/app/config/app_config.dart';
 import 'package:flutter_siges/app/modules/client/client_new/client_new_controller.dart';
 
 class ClientNewPage extends StatefulWidget {
@@ -59,6 +60,9 @@ class _ClientNewPageState extends ModularState<ClientNewPage, ClientNewControlle
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          elevation: 0.1,
+          backgroundColor: appBackgroundColor,
+          centerTitle: true,
           title: Text(widget.title),
         ),
         backgroundColor: Colors.white,

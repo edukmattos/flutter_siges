@@ -77,19 +77,21 @@ class _ClientListPageState extends ModularState<ClientListPage, ClientListContro
           return ListView.builder(
             itemCount: controller.clients.value.length,
             itemBuilder: (BuildContext context, int index) {
-              return ListTile(
-                leading: Icon(Icons.access_alarm),
-                title: Text(controller.clients.value[index].name),
-                subtitle: Text(controller.clients.value[index].einSsa +'\n'+ controller.clients.value[index].email),
-                isThreeLine: true,
-                trailing: Icon(Icons.keyboard_arrow_right),
-                dense: false,
-                contentPadding: EdgeInsets.all(0.0),
-                //selected: false,
-                onLongPress: (){
-                  print("onLongPress");
-                },
-                onTap: (){},
+              return Card(
+                child: ListTile(
+                  leading: Icon(Icons.access_alarm),
+                  title: Text(controller.clients.value[index].name),
+                  subtitle: Text(controller.clients.value[index].einSsa +'\n'+ controller.clients.value[index].email),
+                  isThreeLine: true,
+                  trailing: Icon(Icons.keyboard_arrow_right),
+                  dense: false,
+                  contentPadding: EdgeInsets.all(0.0),
+                  //selected: false,
+                  onLongPress: (){
+                    print("onLongPress");
+                  },
+                  onTap: (){},
+                ),
               );
             }
           );
