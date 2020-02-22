@@ -1,7 +1,9 @@
+import 'package:flutter_siges/app/widgets/custom_combobox/custom_combobox_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_siges/app/modules/city/city_list/city_list_module.dart';
 import 'package:flutter_siges/app/modules/material/material_list/material_list_module.dart';
+import 'package:flutter_siges/app/modules/material/material_new/material_new_module.dart';
 import 'package:flutter_siges/app/modules/product/product_list/product_list_module.dart';
 import 'package:flutter_siges/app/repositories/city_repository.dart';
 import 'package:flutter_siges/app/repositories/material_repository.dart';
@@ -30,6 +32,7 @@ class AppModule extends MainModule {
 
   @override
   List<Bind> get binds => [
+        Bind((i) => CustomComboboxController()),
         //Repositories
         Bind((i) => MaterialRepository(i.get<HasuraConnect>())),
         Bind((i) => ClientRepository(i.get<HasuraConnect>())),
@@ -61,11 +64,16 @@ class AppModule extends MainModule {
         Router('/clients/new',
             module: ClientNewModule(), transition: TransitionType.rightToLeft),
         Router('/materials',
-            module: MaterialListModule(), transition: TransitionType.rightToLeft),
+            module: MaterialListModule(),
+            transition: TransitionType.rightToLeft),
+        Router('/materials/new',
+            module: MaterialNewModule(),
+            transition: TransitionType.rightToLeft),
         Router('/cities',
             module: CityListModule(), transition: TransitionType.rightToLeft),
         Router('/products',
-            module: ProductListModule(), transition: TransitionType.rightToLeft),
+            module: ProductListModule(),
+            transition: TransitionType.rightToLeft),
       ];
 
   @override

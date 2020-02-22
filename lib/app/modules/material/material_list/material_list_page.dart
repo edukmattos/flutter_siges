@@ -78,22 +78,24 @@ class _MaterialListPageState extends ModularState<MaterialListPage, MaterialList
           return ListView.builder(
             itemCount: controller.materials.value.length,
             itemBuilder: (BuildContext context, int index) {
-              return ListTile(
-                leading: Icon(Icons.access_alarm),
-                title: Text(controller.materials.value[index].description),
-                subtitle: Text(controller.materials.value[index].code),
-                isThreeLine: true,
-                trailing: Chip(
-                  label: Text(controller.materials.value[index].materialUnit.code),
-                  avatar: CircleAvatar(
-                    child: Text("3")
+              return Card(
+                child: ListTile(
+                  leading: Icon(Icons.access_alarm),
+                  title: Text(controller.materials.value[index].description),
+                  subtitle: Text(controller.materials.value[index].code),
+                  isThreeLine: true,
+                  trailing: Chip(
+                    label: Text(controller.materials.value[index].materialUnit.code),
+                    avatar: CircleAvatar(
+                      child: Text("3")
+                    ),
                   ),
+                  //selected: false,
+                  onLongPress: (){
+                    print("onLongPress");
+                  },
+                  onTap: (){},
                 ),
-                //selected: false,
-                onLongPress: (){
-                  print("onLongPress");
-                },
-                onTap: (){},
               );
             }
           );

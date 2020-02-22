@@ -36,7 +36,7 @@ class _AuthPageState extends ModularState<AuthPage, AuthController> {
               var result = await controller.signIn();
               print("result: $result");
               if (result) {
-                Modular.to.pushReplacementNamed('/clients');
+                Modular.to.pushReplacementNamed('/materials');
               } else {
                 _flushBar();
                 //Modular.to.pushReplacementNamed('/auth');

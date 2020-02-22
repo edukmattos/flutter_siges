@@ -2,18 +2,23 @@ import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_siges/app/config/app_config.dart';
-import 'package:flutter_siges/app/modules/client/client_new/client_new_controller.dart';
 
-class ClientNewPage extends StatefulWidget {
+import '../../../config/app_config.dart';
+import '../../../widgets/custom_combobox/custom_combobox_widget.dart';
+import 'material_new_controller.dart';
+
+class MaterialNewPage extends StatefulWidget {
   final String title;
-  const ClientNewPage({Key key, this.title = appClientNewPageTag}) : super(key: key);
+  const MaterialNewPage({Key key, this.title = appMaterialNewPageTag})
+      : super(key: key);
 
   @override
-  _ClientNewPageState createState() => _ClientNewPageState();
+  _MaterialNewPageState createState() => _MaterialNewPageState();
 }
 
-class _ClientNewPageState extends ModularState<ClientNewPage, ClientNewController> {
+class _MaterialNewPageState
+    extends ModularState<MaterialNewPage, MaterialNewController> {
+      
   Widget _submitButton() {
     return RaisedButton(
       child: new Text("Confirmar", style: new TextStyle(color: Colors.white)),
@@ -22,11 +27,11 @@ class _ClientNewPageState extends ModularState<ClientNewPage, ClientNewControlle
       //shape: StadiumBorder(),
       onPressed: controller.isFormValid
           ? () async {
-            print("Client Saved !");
+              print("Material Saved !");
               var result = await controller.save();
               ////print(result);
               if (result) {
-                Modular.to.pushReplacementNamed('/clients');
+                Modular.to.pushReplacementNamed('/materials');
               } else {
                 _flushBar();
               }
@@ -75,22 +80,22 @@ class _ClientNewPageState extends ModularState<ClientNewPage, ClientNewControlle
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Observer(
-                    name: 'einSsaObserver',
+                    name: 'codeObserver',
                     builder: (_) {
                       return TextFormField(
                         autofocus: true,
-                        onChanged: controller.changeEinSsa,
+                        onChanged: controller.changeCode,
                         obscureText: false,
                         maxLines: 1,
-                        keyboardType: TextInputType.number,
+                        //keyboardType: TextInputType.number,
                         cursorColor: Colors.orange,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
-                          labelText: 'CPF/CNPJ',
+                          labelText: 'Codigo',
                           prefixIcon:
                               Icon(Icons.email, color: Colors.orange, size: 20),
                           helperText: ' ',
-                          errorText: controller.validateEinSsa(),
+                          errorText: controller.validateCode(),
                         ),
                       );
                     }),
@@ -98,48 +103,50 @@ class _ClientNewPageState extends ModularState<ClientNewPage, ClientNewControlle
                   height: 10,
                 ),
                 Observer(
-                    name: 'nameObserver',
+                    name: 'descriptionObserver',
                     builder: (_) {
                       return TextFormField(
                         autofocus: false,
-                        onChanged: controller.changeName,
+                        onChanged: controller.changeDescription,
                         obscureText: false,
                         maxLines: 1,
-                        keyboardType: TextInputType.emailAddress,
+                        //keyboardType: TextInputType.emailAddress,
                         cursorColor: Colors.orange,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
-                          labelText: 'Nome',
+                          labelText: 'Descricao',
                           prefixIcon:
                               Icon(Icons.face, color: Colors.orange, size: 20),
                           helperText: ' ',
-                          errorText: controller.validateName(),
+                          errorText: controller.validateDescription(),
                         ),
                       );
                     }),
                 SizedBox(
                   height: 10,
                 ),
-                Observer(
-                    name: 'emailObserver',
-                    builder: (_) {
-                      return TextFormField(
-                        autofocus: true,
-                        onChanged: controller.changeEmail,
-                        obscureText: false,
-                        maxLines: 1,
-                        keyboardType: TextInputType.emailAddress,
-                        cursorColor: Colors.orange,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'E-mail',
-                          prefixIcon:
-                              Icon(Icons.email, color: Colors.orange, size: 20),
-                          helperText: ' ',
-                          errorText: controller.validateEmail(),
-                        ),
-                      );
-                    }),
+                CustomComboboxWidget(
+                  items: [
+                    Model("01", "Brasil"),
+                    Model("02", "Canada"),
+                  ],
+                  onChange: (item) {
+                    print(item.description);
+                  },
+                  itemSelected: Model("01", "Brasil"),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                DropdownButtonFormField<String>(
+                  items: ["A", "B", "C"]
+                    .map((label) => DropdownMenuItem(
+                      child: Text(label),
+                      value: label,
+                    ))
+                    .toList(), 
+                  onChanged: null
+                  ),
                 SizedBox(
                   height: 10,
                 ),

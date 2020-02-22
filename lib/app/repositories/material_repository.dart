@@ -1,6 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_siges/app/models/material_model.dart';
 import 'package:hasura_connect/hasura_connect.dart';
+
+import '../models/material_model.dart';
 
 class MaterialRepository extends Disposable {
 
@@ -75,6 +76,7 @@ class MaterialRepository extends Disposable {
 
     return snapshot["data"]["affected_rows"] > 0;
   }
+
   //dispose will be called automatically
   @override
   void dispose() {}

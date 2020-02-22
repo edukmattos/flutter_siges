@@ -19,6 +19,9 @@ class _ProductListPageState extends ModularState<ProductListPage, ProductListCon
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0.1,
+        backgroundColor: appBackgroundColor,
+        centerTitle: true,
         title: Text(widget.title),
       ),
       floatingActionButton: FloatingActionButton.extended(
