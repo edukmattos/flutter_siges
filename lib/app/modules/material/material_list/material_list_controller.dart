@@ -9,9 +9,6 @@ class MaterialListController = _MaterialListBase with _$MaterialListController;
 abstract class _MaterialListBase with Store {
   final MaterialRepository _materialRepository;
 
-  String errorTitle;
-  String errorMsg;
-
   _MaterialListBase(this._materialRepository) {
     materials = ObservableStream(_materialRepository.getMaterials());
   }

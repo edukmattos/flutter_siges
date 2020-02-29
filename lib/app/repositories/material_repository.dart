@@ -2,6 +2,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:hasura_connect/hasura_connect.dart';
 
 import '../models/material_model.dart';
+import '../models/material_dashboard_model.dart';
 
 class MaterialRepository extends Disposable {
 
@@ -35,6 +36,31 @@ class MaterialRepository extends Disposable {
     return snapshot.map((data) => MaterialModel.fromJsonList(data['data']['materials']));
   }
 
+  Stream<Map<String,dynamic>> repoMaterialsCount() {
+
+    var select = '''
+      subscription materialsCount {
+        materials_aggregate {
+          aggregate {
+            count
+          }
+        }
+      }
+    ''';
+
+    var snapshot = _hasuraConnect.subscription(select);
+    
+    //return snapshot.map((data) => MaterialDashboardModel.fromMap(data['data']['materials_aggregate']['aggregate']['count']));
+     
+
+    snapshot.listen((data) {
+      print(data['data']['materials_aggregate']['aggregate']['count']);
+      return MaterialDashboardModel.fromMap(data['data']['materials_aggregate']['aggregate']['count']);
+    }).onError((err) {
+      print(err);
+    });
+  }
+
   Future<bool> save(String code, String descrption, String email) async {
     var insert = '''
       mutation materialSave(\$code: String, \$descrption: String, \$email: String) {
@@ -48,7 +74,7 @@ class MaterialRepository extends Disposable {
         "descrption": descrption,
         "email": email
       }
-    );
+    );   
 
     //print("return  ${snapshot["data"]["affected_rows"]}");
 

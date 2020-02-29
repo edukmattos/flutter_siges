@@ -18,7 +18,7 @@ class MaterialModel {
         this.createdAt,
         this.updatedAt,
         this.deletedAt,
-         this.materialUnit,
+        this.materialUnit,
     });
 
     MaterialModel copyWith({

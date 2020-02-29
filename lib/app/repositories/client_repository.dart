@@ -21,7 +21,7 @@ class ClientRepository extends Disposable {
 
     var snapshot = _hasuraConnect.subscription(select);
 
-    print("snapshot: $snapshot");
+    print("snapshot_client: $snapshot");
     
     return snapshot.map((data) => ClientModel.fromJsonList(data['data']['clients']));
   }

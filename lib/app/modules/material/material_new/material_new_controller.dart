@@ -1,7 +1,7 @@
-import 'package:flutter_siges/app/repositories/material_repository.dart';
-import 'package:flutter_siges/app/repositories/material_unit_repository.dart';
 import 'package:flux_validator_dart/flux_validator_dart.dart';
 import 'package:mobx/mobx.dart';
+
+import '../../../repositories/material_repository.dart';
 
 part 'material_new_controller.g.dart';
 
@@ -13,8 +13,7 @@ abstract class _MaterialNewBase with Store {
   String errorTitle;
   String errorMsg;
   
-  _MaterialNewBase(this._materialRepository);
-  
+  _MaterialNewBase(this._materialRepository);  
   
   @observable
   String code;
