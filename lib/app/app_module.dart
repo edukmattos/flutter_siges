@@ -1,4 +1,3 @@
-import 'package:flutter_siges/app/modules/material/material_dashboard/material_dashboard_module.dart';
 import 'package:flutter_siges/app/widgets/custom_combobox/custom_combobox_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -53,7 +52,7 @@ class AppModule extends MainModule {
   @override
   List<Router> get routers => [
         Router('/',
-            module: MaterialDashboardModule(), transition: TransitionType.rightToLeft),
+            module: ClientListModule(), transition: TransitionType.rightToLeft),
         //Router('/',
         //    module: SplashModule(), transition: TransitionType.rightToLeft),
         Router('/welcome',

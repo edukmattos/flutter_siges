@@ -17,6 +17,7 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  substring_highlight: ^0.1.2
   find_dropdown: ^0.1.8
   smart_select: ^3.0.3
   shared_preferences: ^0.5.6+1

@@ -3,9 +3,11 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_siges/app/modules/material/material_dashboard/material_dashboard_controller.dart';
 
+import '../../../config/app_config.dart';
+
 class MaterialDashboardPage extends StatefulWidget {
   final String title;
-  const MaterialDashboardPage({Key key, this.title = "MaterialDashboard"})
+  const MaterialDashboardPage({Key key, this.title = appMaterialDashboardPageTag})
       : super(key: key);
 
   @override
