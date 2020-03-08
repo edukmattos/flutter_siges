@@ -66,13 +66,6 @@ mixin _$MaterialNewController on _MaterialNewBase, Store {
     }, _$materialUnitIdAtom, name: '${_$materialUnitIdAtom.name}_set');
   }
 
-  final _$saveAsyncAction = AsyncAction('save');
-
-  @override
-  Future<bool> save() {
-    return _$saveAsyncAction.run(() => super.save());
-  }
-
   final _$_MaterialNewBaseActionController =
       ActionController(name: '_MaterialNewBase');
 

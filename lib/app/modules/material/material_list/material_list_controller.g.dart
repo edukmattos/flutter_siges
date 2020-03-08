@@ -26,6 +26,19 @@ mixin _$MaterialListController on _MaterialListBase, Store {
     }, _$materialsAtom, name: '${_$materialsAtom.name}_set');
   }
 
+  final _$_MaterialListBaseActionController =
+      ActionController(name: '_MaterialListBase');
+
+  @override
+  dynamic allMaterials() {
+    final _$actionInfo = _$_MaterialListBaseActionController.startAction();
+    try {
+      return super.allMaterials();
+    } finally {
+      _$_MaterialListBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     final string = 'materials: ${materials.toString()}';

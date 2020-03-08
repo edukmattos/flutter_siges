@@ -1,18 +1,26 @@
-import 'package:flutter_siges/app/models/material_model.dart';
-import 'package:flutter_siges/app/repositories/material_repository.dart';
 import 'package:mobx/mobx.dart';
+
+import '../../../models/material_model.dart';
+import '../../../repositories/material_repository_interface.dart';
 
 part 'material_list_controller.g.dart';
 
 class MaterialListController = _MaterialListBase with _$MaterialListController;
 
 abstract class _MaterialListBase with Store {
-  final MaterialRepository _materialRepository;
+  
+  final IMaterialRepository repository;
 
-  _MaterialListBase(this._materialRepository) {
-    materials = ObservableStream(_materialRepository.getMaterials());
+  _MaterialListBase(IMaterialRepository this.repository) {
+    allMaterials();
   }
 
-  @observable
+  @observable 
   ObservableStream<List<MaterialModel>> materials;
+
+  @action
+  allMaterials(){
+    materials = repository.getMaterials().asObservable();
+  }
+
 }

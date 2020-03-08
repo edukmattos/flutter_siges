@@ -28,13 +28,13 @@ class _MaterialNewPageState
       onPressed: controller.isFormValid
           ? () async {
               print("Material Saved !");
-              var result = await controller.save();
+              //var result = await controller.save();
               ////print(result);
-              if (result) {
-                Modular.to.pushReplacementNamed('/materials');
-              } else {
-                _flushBar();
-              }
+              //if (result) {
+              //  Modular.to.pushReplacementNamed('/materials');
+              //} else {
+              //  _flushBar();
+              //}
             }
           : null,
     );
@@ -42,8 +42,8 @@ class _MaterialNewPageState
 
   Widget _flushBar() {
     return Flushbar(
-      title: controller.errorTitle,
-      message: controller.errorMsg,
+      //title: controller.errorTitle,
+      //message: controller.errorMsg,
       flushbarPosition: FlushbarPosition.BOTTOM,
       flushbarStyle: FlushbarStyle.FLOATING,
       //showProgressIndicator: true,

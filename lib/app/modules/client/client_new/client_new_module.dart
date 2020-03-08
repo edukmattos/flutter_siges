@@ -1,13 +1,13 @@
 import 'package:flutter_modular/flutter_modular.dart';
 
-import '../../../repositories/client_repository.dart';
+import '../../../repositories/client_hasura_repository.dart';
 import 'client_new_controller.dart';
 import 'client_new_page.dart';
 
 class ClientNewModule extends ChildModule {
   @override
   List<Bind> get binds => [
-        Bind((i) => ClientNewController(i.get<ClientRepository>())),
+        Bind((i) => ClientNewController(i.get<ClientHasuraRepository>())),
       ];
 
   @override

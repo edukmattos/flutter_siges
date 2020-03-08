@@ -1,4 +1,4 @@
-import 'package:flutter_siges/app/repositories/client_repository.dart';
+import 'package:flutter_siges/app/repositories/client_hasura_repository.dart';
 import 'package:flux_validator_dart/flux_validator_dart.dart';
 import 'package:mobx/mobx.dart';
 
@@ -7,7 +7,7 @@ part 'client_edit_controller.g.dart';
 class ClientEditController = _ClientEditBase with _$ClientEditController;
 
 abstract class _ClientEditBase with Store {
-  final ClientRepository _clientRepository;
+  final ClientHasuraRepository _clientRepository;
   final String clientId;
   String errorTitle;
   String errorMsg;

@@ -42,9 +42,16 @@ class MaterialModel {
             materialUnit: materialUnit ?? this.materialUnit,
         );
 
-    factory MaterialModel.fromJson(String str) => MaterialModel.fromMap(json.decode(str));
-
-    String toJson() => json.encode(toMap());
+    factory MaterialModel.fromJson(Map<String, dynamic> json) => MaterialModel(
+        id: json["id"],
+        code: json["code"],
+        description: json["description"],
+        materialUnitId: json["material_unit_id"],
+        createdAt: json["created_at"],
+        updatedAt: json["updated_at"],
+        deletedAt: json["deleted_at"],
+        materialUnit: MaterialUnit.fromMap(json["material_unit"]),
+    );
 
     factory MaterialModel.fromMap(Map<String, dynamic> json) => MaterialModel(
         id: json["id"],

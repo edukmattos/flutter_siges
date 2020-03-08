@@ -1,31 +1,23 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_siges/app/models/client_model.dart';
+import 'package:flutter_siges/app/modules/client/documents/client_document.dart';
+import 'package:flutter_siges/app/repositories/client_repository_interface.dart';
 import 'package:hasura_connect/hasura_connect.dart';
 
-class ClientRepository extends Disposable {
+class ClientHasuraRepository extends Disposable implements IClientRepository {
 
   final HasuraConnect _hasuraConnect;
-  ClientRepository(this._hasuraConnect);
+  ClientHasuraRepository(this._hasuraConnect);
 
   Stream<List<ClientModel>> getClients() {
-    var select = '''
-      subscription getClients {
-        clients {
-          id
-          ein_ssa
-          name
-          email
-        }
-      }
-    ''';
-
-    var snapshot = _hasuraConnect.subscription(select);
-
-    print("snapshot_client: $snapshot");
-    
-    return snapshot.map((data) => ClientModel.fromJsonList(data['data']['clients']));
+    return _hasuraConnect.subscription(docAllClients).map((event) { 
+      return (event['data']['clients'] as List).map((json) {
+        return ClientModel.fromJson(json);
+      }).toList();
+    });
   }
 
+  @override
   Future<ClientModel> getClientById(String clientId) async {
     var select = '''
       subscription getClients {
@@ -45,6 +37,7 @@ class ClientRepository extends Disposable {
     //return snapshot.map((data) => ClientModel.fromJsonList(data['data']['clients']));
   }
 
+  @override
   Future<bool> save(String einSsa, String name, String email) async {
     var insert = '''
       mutation clientSave(\$einSsa: String, \$name: String, \$email: String) {
@@ -69,6 +62,7 @@ class ClientRepository extends Disposable {
     
   }
 
+  @override
   Future<bool> clientUpdate(String einSsa, String name, String email) async {
     var insert = '''
       mutation clientSave(\$einSsa: String, \$name: String, \$email: String) {
@@ -86,7 +80,17 @@ class ClientRepository extends Disposable {
 
     return snapshot["data"]["affected_rows"] > 0;
   }
+
+  //Future<bool> delete(ClientModel model);
+
+
   //dispose will be called automatically
   @override
   void dispose() {}
+
+  @override
+  Stream<List<ClientModel>> getIClients() {
+    // TODO: implement getIClients
+    throw UnimplementedError();
+  }
 }

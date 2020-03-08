@@ -26,6 +26,19 @@ mixin _$ClientListController on _ClientListBase, Store {
     }, _$clientsAtom, name: '${_$clientsAtom.name}_set');
   }
 
+  final _$_ClientListBaseActionController =
+      ActionController(name: '_ClientListBase');
+
+  @override
+  dynamic allClients() {
+    final _$actionInfo = _$_ClientListBaseActionController.startAction();
+    try {
+      return super.allClients();
+    } finally {
+      _$_ClientListBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     final string = 'clients: ${clients.toString()}';

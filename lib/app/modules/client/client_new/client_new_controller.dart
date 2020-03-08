@@ -1,6 +1,7 @@
-import 'package:flutter_siges/app/repositories/client_repository.dart';
 import 'package:flux_validator_dart/flux_validator_dart.dart';
 import 'package:mobx/mobx.dart';
+
+import '../../../repositories/client_hasura_repository.dart';
 
 part 'client_new_controller.g.dart';
 
@@ -8,7 +9,7 @@ class ClientNewController = _ClientNewBase with _$ClientNewController;
 
 abstract class _ClientNewBase with Store {
   
-  final ClientRepository _clientRepository;
+  final ClientHasuraRepository _clientRepository;
   String errorTitle;
   String errorMsg;
   

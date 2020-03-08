@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_siges/app/config/app_config.dart';
-import 'package:flutter_siges/app/modules/client/client_list/client_list_controller.dart';
+
+import '../../../config/app_config.dart';
+import '../../../models/client_model.dart';
+import '../widgets/item_list_tile_widget.dart';
+import 'client_list_controller.dart';
 
 class ClientListPage extends StatefulWidget {
   final String title;
@@ -50,7 +53,9 @@ class _ClientListPageState extends ModularState<ClientListPage, ClientListContro
       ),
       body: Observer(
         name: 'clientListObserver',
-        builder: (BuildContext context) {
+        builder: (_) {
+
+          List<ClientModel> list = controller.clients.data;
 
           if (controller.clients.hasError) {
             print(controller.clients.hasError);
@@ -61,7 +66,7 @@ class _ClientListPageState extends ModularState<ClientListPage, ClientListContro
             );
           }
 
-          if (controller.clients.value == null) {
+          if (controller.clients.data == null) {
             return Center(
               child: CircularProgressIndicator(
                 backgroundColor: Colors.red,
@@ -75,22 +80,14 @@ class _ClientListPageState extends ModularState<ClientListPage, ClientListContro
           );
 
           return ListView.builder(
-            itemCount: controller.clients.value.length,
-            itemBuilder: (BuildContext context, int index) {
+            itemCount: list.length,
+            itemBuilder: (_, int index) {
+
+              ClientModel model = list[index];
+
               return Card(
-                child: ListTile(
-                  leading: Icon(Icons.access_alarm),
-                  title: Text(controller.clients.value[index].name),
-                  subtitle: Text(controller.clients.value[index].einSsa +'\n'+ controller.clients.value[index].email),
-                  isThreeLine: true,
-                  trailing: Icon(Icons.keyboard_arrow_right),
-                  dense: false,
-                  contentPadding: EdgeInsets.all(0.0),
-                  //selected: false,
-                  onLongPress: (){
-                    print("onLongPress");
-                  },
-                  onTap: (){},
+                child: ItemListTileWidget(
+                  model: model
                 ),
               );
             }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_siges/app/modules/client/client_edit/client_edit_controller.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_siges/app/modules/client/client_edit/client_edit_page.dart';
-import 'package:flutter_siges/app/repositories/client_repository.dart';
+import 'package:flutter_siges/app/repositories/client_hasura_repository.dart';
 import 'package:hasura_connect/hasura_connect.dart';
 
 class ClientEditModule extends ChildModule {
@@ -14,9 +14,9 @@ class ClientEditModule extends ChildModule {
   @override
   List<Bind> get binds => [
         // Repositories
-        Bind((i) => ClientRepository(i.get<HasuraConnect>())),
+        Bind((i) => ClientHasuraRepository(i.get<HasuraConnect>())),
         // Controllers
-        Bind((i) => ClientEditController(i.get<ClientRepository>(), i.params["clientId"]), singleton: false),
+        Bind((i) => ClientEditController(i.get<ClientHasuraRepository>(), i.params["clientId"]), singleton: false),
       ];
 
   @override

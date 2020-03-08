@@ -1,7 +1,6 @@
-import 'package:flutter_siges/app/models/material_dashboard_model.dart';
 import 'package:mobx/mobx.dart';
 
-import '../../../repositories/material_repository.dart';
+import '../../../repositories/material_repository_interface.dart';
 
 part 'material_dashboard_controller.g.dart';
 
@@ -10,10 +9,10 @@ class MaterialDashboardController = _MaterialDashboardBase
 
 abstract class _MaterialDashboardBase with Store {
 
-  final MaterialRepository _materialRepository;
+  final IMaterialRepository _repository;
 
-  _MaterialDashboardBase(this._materialRepository) {
-    count = ObservableStream(_materialRepository.repoMaterialsCount());
+  _MaterialDashboardBase(this._repository) {
+    //count = ObservableStream(_repository.repoMaterialsCount());
     print("materialsCount: $count");
   }
 

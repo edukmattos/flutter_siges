@@ -1,17 +1,18 @@
 import 'package:flutter_modular/flutter_modular.dart';
 
-import '../../../repositories/client_repository.dart';
 import '../../../modules/client/client_list/client_list_page.dart';
+import '../../../repositories/client_hasura_repository.dart';
+import '../../../repositories/client_repository_interface.dart';
 import 'client_list_controller.dart';
-
 
 class ClientListModule extends ChildModule {
   @override
   List<Bind> get binds => [
-        // Repositories
-        //Bind((i) => ClientRepository(i.get<HasuraConnect>())),
         // Controllers
-        Bind((i) => ClientListController(i.get<ClientRepository>())),
+        Bind((i) => ClientListController(i.get())),
+
+        Bind<IClientRepository>((i) => ClientHasuraRepository(i.get())),
+        //Bind((i) => HasuraConnect(hasura_config_url)),
       ];
 
   @override

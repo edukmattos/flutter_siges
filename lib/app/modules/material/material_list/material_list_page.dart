@@ -3,6 +3,8 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../config/app_config.dart';
+import '../../../models/material_model.dart';
+import '../widgets/item_list_tile_widget.dart';
 import 'material_list_controller.dart';
 
 class MaterialListPage extends StatefulWidget {
@@ -51,7 +53,9 @@ class _MaterialListPageState extends ModularState<MaterialListPage, MaterialList
       ),
       body: Observer(
         name: 'materialListObserver',
-        builder: (BuildContext context) {
+        builder: (_) {
+
+          List<MaterialModel> list = controller.materials.data;
 
           if (controller.materials.hasError) {
             print(controller.materials.hasError);
@@ -62,7 +66,7 @@ class _MaterialListPageState extends ModularState<MaterialListPage, MaterialList
             );
           }
 
-          if (controller.materials.value == null) {
+          if (controller.materials.data == null) {
             return Center(
               child: CircularProgressIndicator(
                 backgroundColor: Colors.red,
@@ -77,24 +81,13 @@ class _MaterialListPageState extends ModularState<MaterialListPage, MaterialList
 
           return ListView.builder(
             itemCount: controller.materials.value.length,
-            itemBuilder: (BuildContext context, int index) {
+            itemBuilder: (_, int index) {
+
+              MaterialModel model = list[index];
+
               return Card(
-                child: ListTile(
-                  leading: Icon(Icons.access_alarm),
-                  title: Text(controller.materials.value[index].description),
-                  subtitle: Text(controller.materials.value[index].code),
-                  isThreeLine: true,
-                  trailing: Chip(
-                    label: Text(controller.materials.value[index].materialUnit.code),
-                    avatar: CircleAvatar(
-                      child: Text("3")
-                    ),
-                  ),
-                  //selected: false,
-                  onLongPress: (){
-                    print("onLongPress");
-                  },
-                  onTap: (){},
+                child: ItemListTileWidget(
+                  model: model
                 ),
               );
             }

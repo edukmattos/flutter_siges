@@ -1,7 +1,7 @@
 import 'package:flux_validator_dart/flux_validator_dart.dart';
 import 'package:mobx/mobx.dart';
 
-import '../../../repositories/material_repository.dart';
+import '../../../repositories/material_repository_interface.dart';
 
 part 'material_new_controller.g.dart';
 
@@ -9,11 +9,10 @@ class MaterialNewController = _MaterialNewBase with _$MaterialNewController;
 
 abstract class _MaterialNewBase with Store {
   
-  final MaterialRepository _materialRepository;
-  String errorTitle;
-  String errorMsg;
+  final IMaterialRepository repository;
   
-  _MaterialNewBase(this._materialRepository);  
+  
+  _MaterialNewBase(this.repository);  
   
   @observable
   String code;
@@ -33,10 +32,10 @@ abstract class _MaterialNewBase with Store {
   @action
   changeMaterialUnitId(String value) => materialUnitId = value;
 
-  @action
-  Future<bool> save() async {
-    return await _materialRepository.save(code, description, materialUnitId);
-  }
+  //@action
+  //Future<bool> save() async {
+    //return await repository.save(code, description, materialUnitId);
+  //}
 
   @computed
   bool get isFormValid {
