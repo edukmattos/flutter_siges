@@ -1,8 +1,7 @@
-import 'package:flutter_siges/app/repositories/client_repository_interface.dart';
 import 'package:mobx/mobx.dart';
 
 import '../../../models/client_model.dart';
-import '../../../repositories/client_hasura_repository.dart';
+import '../../../repositories/client_repository_interface.dart';
 
 part 'client_list_controller.g.dart';
 

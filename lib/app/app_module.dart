@@ -1,3 +1,4 @@
+import 'package:flutter_siges/app/modules/client/client_dashboard/client_dashboard_module.dart';
 import 'package:flutter_siges/app/repositories/client_hasura_repository.dart';
 import 'package:flutter_siges/app/repositories/material_hasura_repository.dart';
 import 'package:flutter_siges/app/widgets/custom_combobox/custom_combobox_controller.dart';

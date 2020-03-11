@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:mobx/src/api/async.dart';
+import 'package:flutter_siges/app/models/client_model.dart';
+import 'package:mobx/mobx.dart';
 import 'package:substring_highlight/substring_highlight.dart';
+
 import '../../../config/app_config.dart';
-import '../../../models/client_model.dart';
 import 'client_dashboard_controller.dart';
 
 class ClientDashboardPage extends StatefulWidget {
@@ -19,9 +21,14 @@ class ClientDashboardPage extends StatefulWidget {
 class _ClientDashboardPageState
     extends ModularState<ClientDashboardPage, ClientDashboardController> {
   //use 'controller' variable to access controller
-
+  
   @override
   Widget build(BuildContext context) {
+
+    List<ClientModel> clients = controller.clients.data;
+
+    print("clients: $clients");
+    
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -45,17 +52,17 @@ class _ClientDashboardPageState
 
 class DataSearch extends SearchDelegate<String> {
 
-  final clients = [
-    "Eduardo Camara de Mattos",
-    "BRUNA PEREIRA DE MATTOS",
-    "Sandra Pereira de Mattos",
-    "Solange Pereira",
-    "Sonia Pereira Bortolini",
-    "Antonio Francisco Meireles de Mattos",
-    "Clara Maria Camara de Mattos"
-  ];
+  //final clients = [
+  //  "Eduardo Camara de Mattos",
+  //  "BRUNA PEREIRA DE MATTOS",
+  //  "Sandra Pereira de Mattos",
+  //  "Solange Pereira",
+  //  "Sonia Pereira Bortolini",
+  //  "Antonio Francisco Meireles de Mattos",
+  //  "Clara Maria Camara de Mattos"
+  //];
 
-  //final clients = [];
+  final clients = [];
 
   final recentClients = [
     "Sandra Pereira de Mattos",
@@ -109,30 +116,41 @@ class DataSearch extends SearchDelegate<String> {
 
   @override
   Widget buildSuggestions(BuildContext context) {
+    
+    //List<ClientModel> list = controller.clients.data;
+    
     // Show whem someone searches for something
     final suggestionList = query.isEmpty 
       ? recentClients 
       : clients.where((c) => c.contains(query)).toList();
 
-    return ListView.builder(
-      itemBuilder: (context, index) => ListTile(
-        onTap: (){
-          showResults(context);
-        },
-        leading: Icon(Icons.location_city),
-        title: SubstringHighlight(
-          text: suggestionList[index], 
-          term: query,
-          textStyle: TextStyle(                       // non-highlight style                       
-            color: Colors.grey,
-          ),
-          textStyleHighlight: TextStyle(              // highlight style
-            color: Colors.black,
-            decoration: TextDecoration.underline,
-          ), 
-        )
-      ),
-      itemCount: suggestionList.length,
+    return Observer(
+      name: 'clientListObserver',
+        builder: (_) {
+
+          //List<ClientModel> list = controller.clients.data;
+          
+          return ListView.builder(
+            itemBuilder: (context, index) => ListTile(
+              onTap: (){
+                showResults(context);
+              },
+              leading: Icon(Icons.location_city),
+              title: SubstringHighlight(
+                text: suggestionList[index], 
+                term: query,
+                textStyle: TextStyle(                       // non-highlight style                       
+                  color: Colors.grey,
+                ),
+                textStyleHighlight: TextStyle(              // highlight style
+                  color: Colors.black,
+                  decoration: TextDecoration.underline,
+                ), 
+              )
+            ),
+          itemCount: suggestionList.length,
+        );
+        }
     );
   }  
 } 

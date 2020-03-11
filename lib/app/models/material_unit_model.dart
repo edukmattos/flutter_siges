@@ -38,6 +38,15 @@ class MaterialUnitModel {
             deletedAt: deletedAt ?? this.deletedAt,
         );
 
+    factory MaterialUnitModel.fromJson(Map<String, dynamic> json) => MaterialUnitModel(
+        id: json["id"],
+        code: json["code"],
+        description: json["description"],
+        createdAt: json["created_at"],
+        updateAt: json["update_at"],
+        deletedAt: json["deleted_at"],
+    );
+    
     factory MaterialUnitModel.fromMap(Map<String, dynamic> json) => MaterialUnitModel(
         id: json["id"],
         code: json["code"],

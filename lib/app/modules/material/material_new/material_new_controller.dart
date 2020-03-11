@@ -1,6 +1,7 @@
 import 'package:flux_validator_dart/flux_validator_dart.dart';
 import 'package:mobx/mobx.dart';
 
+import '../../../models/material_unit_model.dart';
 import '../../../repositories/material_repository_interface.dart';
 
 part 'material_new_controller.g.dart';
@@ -9,10 +10,19 @@ class MaterialNewController = _MaterialNewBase with _$MaterialNewController;
 
 abstract class _MaterialNewBase with Store {
   
-  final IMaterialRepository repository;
+  final IMaterialRepository repository; 
   
-  
-  _MaterialNewBase(this.repository);  
+  _MaterialNewBase(IMaterialRepository this.repository) {
+    allMaterialUnits();
+  }
+
+  @observable
+  ObservableStream<List<MaterialUnitModel>> materialUnits;
+
+  @action
+  allMaterialUnits(){
+    materialUnits = repository.getMaterialUnits().asObservable();
+  }
   
   @observable
   String code;
@@ -22,7 +32,7 @@ abstract class _MaterialNewBase with Store {
   
   @observable
   String description;
-  
+
   @action
   changeDescription(String value) => description = value;
 

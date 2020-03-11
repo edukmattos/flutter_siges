@@ -1,7 +1,10 @@
+import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_siges/app/models/material_unit_model.dart';
+import 'package:searchable_dropdown/searchable_dropdown.dart';
 
 import '../../../config/app_config.dart';
 import '../../../widgets/custom_combobox/custom_combobox_widget.dart';
@@ -18,6 +21,36 @@ class MaterialNewPage extends StatefulWidget {
 
 class _MaterialNewPageState
     extends ModularState<MaterialNewPage, MaterialNewController> {
+
+  List<MaterialUnitModel> materialUnitsOptions = [];
+  MaterialUnitModel materialUnitSelected;
+
+  List<String> added = [];
+  String currentText = "";
+  GlobalKey<AutoCompleteTextFieldState<String>> key = new GlobalKey();
+
+  List<String> suggestions = [
+    "m",
+    "m2",
+    "m3",
+    "kg",
+    "g",
+    "l",
+    "pc"
+  ];
+
+  @override
+  void initState() {
+
+    print("materialUnits: ${controller.materialUnits.value}");
+
+    materialUnitsOptions.add(MaterialUnitModel(code:"m", id:"1"));
+    materialUnitsOptions.add(MaterialUnitModel(code:"m2", id:"2"));
+    materialUnitsOptions.add(MaterialUnitModel(code:"m3", id:"3"));
+    
+    super.initState();
+  }
+
       
   Widget _submitButton() {
     return RaisedButton(
@@ -122,31 +155,83 @@ class _MaterialNewPageState
                         ),
                       );
                     }),
+
                 SizedBox(
                   height: 10,
                 ),
-                CustomComboboxWidget(
-                  items: [
-                    Model("01", "Brasil"),
-                    Model("02", "Canada"),
-                  ],
-                  onChange: (item) {
-                    print(item.description);
-                  },
-                  itemSelected: Model("01", "Brasil"),
-                ),
+                Observer(
+                    name: 'descriptionObserver',
+                    builder: (_) {
+                      return SimpleAutoCompleteTextField(
+                        key: key,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Descricao',
+                          prefixIcon:
+                              Icon(Icons.face, color: Colors.orange, size: 20),
+                          helperText: ' ',
+                          errorText: controller.validateMaterialUnitId(),
+                        ),
+                        suggestions: suggestions,
+                        textChanged: (text) => currentText = text,
+                        clearOnSubmit: true,
+                        textSubmitted: (text) => setState(() {
+                              if (text != "") {
+                                added.add(text);
+                              }
+                            }),
+                      );
+                    }),
+
+
                 SizedBox(
                   height: 10,
                 ),
-                DropdownButtonFormField<String>(
-                  items: ["A", "B", "C"]
-                    .map((label) => DropdownMenuItem(
-                      child: Text(label),
-                      value: label,
-                    ))
-                    .toList(), 
-                  onChanged: null
-                  ),
+                Observer(
+                    name: 'materialUnitObserver',
+                    builder: (_) {
+                      return TextFormField(
+                        autofocus: false,
+                        onChanged: controller.changeMaterialUnitId,
+                        obscureText: false,
+                        maxLines: 1,
+                        //keyboardType: TextInputType.emailAddress,
+                        cursorColor: Colors.orange,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Unidade',
+                          prefixIcon:
+                              Icon(Icons.face, color: Colors.orange, size: 20),
+                          helperText: ' ',
+                          errorText: controller.validateMaterialUnitId(),
+                        ),
+                      );
+                    }),
+                SizedBox(
+                  height: 10,
+                ),
+
+
+                Observer(
+                    name: 'materialUnitObserver1',
+                    builder: (_) {
+                      return SearchableDropdown<MaterialUnitModel>.single(
+                        items: materialUnitsOptions.map((model) {
+                          return DropdownMenuItem<MaterialUnitModel>(
+                            child: Text(model.code),
+                            value: model,
+                          );
+                        }).toList(),
+                        value: materialUnitSelected,
+                        hint: "Unidade",
+                        searchHint: "Material: Unidade",
+                        validator: null,
+                        onChanged: controller.changeMaterialUnitId,
+                        isExpanded: true,
+                      );
+                    }
+                ),
+
                 SizedBox(
                   height: 10,
                 ),
@@ -154,7 +239,8 @@ class _MaterialNewPageState
                     name: 'submitButtonObserver',
                     builder: (_) {
                       return _submitButton();
-                    }),
+                    }
+                ),
               ],
             ),
           ),

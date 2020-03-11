@@ -26,6 +26,20 @@ mixin _$ClientDashboardController on _ClientDashboardControllerBase, Store {
     }, _$clientsAtom, name: '${_$clientsAtom.name}_set');
   }
 
+  final _$_ClientDashboardControllerBaseActionController =
+      ActionController(name: '_ClientDashboardControllerBase');
+
+  @override
+  dynamic allClients() {
+    final _$actionInfo =
+        _$_ClientDashboardControllerBaseActionController.startAction();
+    try {
+      return super.allClients();
+    } finally {
+      _$_ClientDashboardControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     final string = 'clients: ${clients.toString()}';
