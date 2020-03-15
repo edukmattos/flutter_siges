@@ -1,8 +1,8 @@
 import 'package:flux_validator_dart/flux_validator_dart.dart';
 import 'package:mobx/mobx.dart';
 
-import '../../../models/material_unit_model.dart';
 import '../../../repositories/material_repository_interface.dart';
+import '../models/material_unit_model_dto.dart';
 
 part 'material_new_controller.g.dart';
 
@@ -17,11 +17,12 @@ abstract class _MaterialNewBase with Store {
   }
 
   @observable
-  ObservableStream<List<MaterialUnitModel>> materialUnits;
+  ObservableStream<List<MaterialUnitModelDto>> materialUnits;
 
   @action
   allMaterialUnits(){
     materialUnits = repository.getMaterialUnits().asObservable();
+    print("ok");
   }
   
   @observable

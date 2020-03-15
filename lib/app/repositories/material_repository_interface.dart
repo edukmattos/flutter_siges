@@ -1,9 +1,9 @@
-import 'package:flutter_siges/app/models/material_model.dart';
-import 'package:flutter_siges/app/models/material_unit_model.dart';
+import '../modules/material/models/material_model.dart';
+import '../modules/material/models/material_unit_model_dto.dart';
 
 abstract class IMaterialRepository {
 
   Stream<List<MaterialModel>> getMaterials(); 
-  Stream<List<MaterialUnitModel>> getMaterialUnits(); 
+  Stream<List<MaterialUnitModelDto>> getMaterialUnits(); 
 
 }

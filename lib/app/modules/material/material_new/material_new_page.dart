@@ -3,11 +3,11 @@ import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_siges/app/models/material_unit_model.dart';
+import 'package:flutter_siges/app/modules/material/models/material_unit_model_dto.dart';
 import 'package:searchable_dropdown/searchable_dropdown.dart';
 
 import '../../../config/app_config.dart';
-import '../../../widgets/custom_combobox/custom_combobox_widget.dart';
+import '../../../models/material_unit_model.dart';
 import 'material_new_controller.dart';
 
 class MaterialNewPage extends StatefulWidget {
@@ -42,7 +42,7 @@ class _MaterialNewPageState
   @override
   void initState() {
 
-    print("materialUnits: ${controller.materialUnits.value}");
+    print("Materiais: ${controller.materialUnits}");
 
     materialUnitsOptions.add(MaterialUnitModel(code:"m", id:"1"));
     materialUnitsOptions.add(MaterialUnitModel(code:"m2", id:"2"));
@@ -155,10 +155,10 @@ class _MaterialNewPageState
                         ),
                       );
                     }),
-
                 SizedBox(
                   height: 10,
                 ),
+
                 Observer(
                     name: 'descriptionObserver',
                     builder: (_) {
@@ -182,11 +182,10 @@ class _MaterialNewPageState
                             }),
                       );
                     }),
-
-
                 SizedBox(
                   height: 10,
                 ),
+
                 Observer(
                     name: 'materialUnitObserver',
                     builder: (_) {
@@ -206,17 +205,16 @@ class _MaterialNewPageState
                           errorText: controller.validateMaterialUnitId(),
                         ),
                       );
-                    }),
+                    }),          
                 SizedBox(
                   height: 10,
                 ),
-
-
+                
                 Observer(
                     name: 'materialUnitObserver1',
                     builder: (_) {
                       return SearchableDropdown<MaterialUnitModel>.single(
-                        items: materialUnitsOptions.map((model) {
+                        items: controller.allMaterialUnits().map((model) {
                           return DropdownMenuItem<MaterialUnitModel>(
                             child: Text(model.code),
                             value: model,

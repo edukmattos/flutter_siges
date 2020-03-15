@@ -3,7 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../config/app_config.dart';
-import '../../../models/material_model.dart';
+import '../models/material_model.dart';
 import '../widgets/item_list_tile_widget.dart';
 import 'material_list_controller.dart';
 

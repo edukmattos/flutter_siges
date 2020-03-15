@@ -1,7 +1,7 @@
 import 'package:mobx/mobx.dart';
 
-import '../../../models/material_model.dart';
 import '../../../repositories/material_repository_interface.dart';
+import '../models/material_model.dart';
 
 part 'material_list_controller.g.dart';
 

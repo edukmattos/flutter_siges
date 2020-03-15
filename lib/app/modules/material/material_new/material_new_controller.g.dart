@@ -15,6 +15,23 @@ mixin _$MaterialNewController on _MaterialNewBase, Store {
   bool get isFormValid =>
       (_$isFormValidComputed ??= Computed<bool>(() => super.isFormValid)).value;
 
+  final _$materialUnitsAtom = Atom(name: '_MaterialNewBase.materialUnits');
+
+  @override
+  ObservableStream<List<MaterialUnitModelDto>> get materialUnits {
+    _$materialUnitsAtom.context.enforceReadPolicy(_$materialUnitsAtom);
+    _$materialUnitsAtom.reportObserved();
+    return super.materialUnits;
+  }
+
+  @override
+  set materialUnits(ObservableStream<List<MaterialUnitModelDto>> value) {
+    _$materialUnitsAtom.context.conditionallyRunInAction(() {
+      super.materialUnits = value;
+      _$materialUnitsAtom.reportChanged();
+    }, _$materialUnitsAtom, name: '${_$materialUnitsAtom.name}_set');
+  }
+
   final _$codeAtom = Atom(name: '_MaterialNewBase.code');
 
   @override
@@ -66,25 +83,18 @@ mixin _$MaterialNewController on _MaterialNewBase, Store {
     }, _$materialUnitIdAtom, name: '${_$materialUnitIdAtom.name}_set');
   }
 
-  final _$materialUnitsAtom = Atom(name: '_MaterialNewBase.materialUnits');
-
-  @override
-  ObservableStream<List<MaterialUnitModel>> get materialUnits {
-    _$materialUnitsAtom.context.enforceReadPolicy(_$materialUnitsAtom);
-    _$materialUnitsAtom.reportObserved();
-    return super.materialUnits;
-  }
-
-  @override
-  set materialUnits(ObservableStream<List<MaterialUnitModel>> value) {
-    _$materialUnitsAtom.context.conditionallyRunInAction(() {
-      super.materialUnits = value;
-      _$materialUnitsAtom.reportChanged();
-    }, _$materialUnitsAtom, name: '${_$materialUnitsAtom.name}_set');
-  }
-
   final _$_MaterialNewBaseActionController =
       ActionController(name: '_MaterialNewBase');
+
+  @override
+  dynamic allMaterialUnits() {
+    final _$actionInfo = _$_MaterialNewBaseActionController.startAction();
+    try {
+      return super.allMaterialUnits();
+    } finally {
+      _$_MaterialNewBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   dynamic changeCode(String value) {
@@ -117,19 +127,9 @@ mixin _$MaterialNewController on _MaterialNewBase, Store {
   }
 
   @override
-  dynamic allMaterialUnits() {
-    final _$actionInfo = _$_MaterialNewBaseActionController.startAction();
-    try {
-      return super.allMaterialUnits();
-    } finally {
-      _$_MaterialNewBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   String toString() {
     final string =
-        'code: ${code.toString()},description: ${description.toString()},materialUnitId: ${materialUnitId.toString()},materialUnits: ${materialUnits.toString()},isFormValid: ${isFormValid.toString()}';
+        'materialUnits: ${materialUnits.toString()},code: ${code.toString()},description: ${description.toString()},materialUnitId: ${materialUnitId.toString()},isFormValid: ${isFormValid.toString()}';
     return '{$string}';
   }
 }

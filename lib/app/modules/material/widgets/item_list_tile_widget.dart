@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../models/material_model.dart';
+import '../models/material_model.dart';
 
 class ItemListTileWidget extends StatelessWidget {
   final MaterialModel model;
