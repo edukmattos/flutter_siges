@@ -9,7 +9,7 @@ class MaterialNewModule extends ChildModule {
   @override
   List<Bind> get binds => [
         // Controllers
-        Bind((i) => MaterialNewController(i.get())),
+        Bind((i) => MaterialNewController(i.get<IMaterialRepository>())),
 
         // Repositories
         Bind<IMaterialRepository>((i) => MaterialHasuraRepository(i.get())),

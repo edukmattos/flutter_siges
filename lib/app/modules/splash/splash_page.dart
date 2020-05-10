@@ -25,7 +25,19 @@ class SplashPageState extends ModularState<SplashPage, SplashController>
   }
 
   void navigationPage() {
-    Modular.to.pushNamed('/welcome');
+    //Modular.to.pushNamed('/welcome');
+    userIsLogged();
+  }
+
+  void userIsLogged() async {
+    var result = await controller.userIsLogged();
+
+    if (result) {
+      Modular.to.pushReplacementNamed('/home');
+      
+    } else {
+      Modular.to.pushReplacementNamed('/welcome');
+    }
   }
 
   @override

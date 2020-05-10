@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flux_validator_dart/flux_validator_dart.dart';
 import 'package:mobx/mobx.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 part 'auth_controller.g.dart';
 
@@ -56,9 +57,9 @@ abstract class _AuthBase with Store {
 
       var tokenId = await user.getIdToken();
 
+      savePrefsUser(user);
+      
       var valid = tokenId != null;
-
-      //print("valid: $valid");
 
       return valid;
       
@@ -78,4 +79,13 @@ abstract class _AuthBase with Store {
       return false;
     }
   } 
+
+  Future<bool> savePrefsUser(user) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    
+    prefs.setString('userEmail', user.email);
+    prefs.setString('userName', user.displayName);
+
+    return true;
+  }
 }

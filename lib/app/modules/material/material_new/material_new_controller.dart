@@ -13,17 +13,21 @@ abstract class _MaterialNewBase with Store {
   final IMaterialRepository repository; 
   
   _MaterialNewBase(IMaterialRepository this.repository) {
-    allMaterialUnits();
+    repository.getMaterialUnits().then((data) => 
+      print(data)
+    );
   }
 
-  @observable
-  ObservableStream<List<MaterialUnitModelDto>> materialUnits;
+  //final MaterialUnitModelDto materialUnits;
 
-  @action
-  allMaterialUnits(){
-    materialUnits = repository.getMaterialUnits().asObservable();
-    print("ok");
-  }
+  //@observable
+  //ObservableStream<List<MaterialUnitModelDto>> materialUnits;
+
+  //@action
+  //allMaterialUnits(){
+  //  materialUnits = repository.getMaterialUnits().asObservable();
+  //  print("ok");
+  //}
   
   @observable
   String code;

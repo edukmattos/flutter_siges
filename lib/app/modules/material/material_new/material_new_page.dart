@@ -3,7 +3,6 @@ import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_siges/app/modules/material/models/material_unit_model_dto.dart';
 import 'package:searchable_dropdown/searchable_dropdown.dart';
 
 import '../../../config/app_config.dart';
@@ -42,7 +41,7 @@ class _MaterialNewPageState
   @override
   void initState() {
 
-    print("Materiais: ${controller.materialUnits}");
+    //print("Materiais: ${controller.materialUnits}");
 
     materialUnitsOptions.add(MaterialUnitModel(code:"m", id:"1"));
     materialUnitsOptions.add(MaterialUnitModel(code:"m2", id:"2"));
@@ -214,7 +213,7 @@ class _MaterialNewPageState
                     name: 'materialUnitObserver1',
                     builder: (_) {
                       return SearchableDropdown<MaterialUnitModel>.single(
-                        items: controller.allMaterialUnits().map((model) {
+                        items: materialUnitsOptions.map((model) {
                           return DropdownMenuItem<MaterialUnitModel>(
                             child: Text(model.code),
                             value: model,

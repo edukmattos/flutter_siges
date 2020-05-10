@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+// User
+const appUserLoggedName = '';
+const appUserLoggedEmail = 'edukmattos@gmail.com';
+
 // Pages
 const appClientDashboardPageTag  = 'Clientes';
 const appClientListPageTag = 'Clientes';

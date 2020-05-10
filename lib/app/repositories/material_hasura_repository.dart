@@ -20,13 +20,12 @@ class MaterialHasuraRepository extends Disposable implements IMaterialRepository
     });
   }
 
-  Stream<List<MaterialUnitModelDto>> getMaterialUnits() {
-    return _hasuraConnect.subscription(docAllMaterialUnits).map((event) { 
-       return (event['data']['material_units'] as List).map((json) {
-        return MaterialUnitModelDto.fromMap(json);
-      }).toList();
-    });
+  Future<MaterialUnitModelDto> getMaterialUnits() async {
 
+    var snapshot = await _hasuraConnect.query(docAllMaterialUnits);
+    
+    return MaterialUnitModelDto.fromMap(snapshot['data']);
+    
   }
 
   //dispose will be called automatically

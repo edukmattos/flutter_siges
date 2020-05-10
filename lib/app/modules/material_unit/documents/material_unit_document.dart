@@ -1,5 +1,5 @@
 const String docAllMaterialUnits = '''
-  query getMaterialUnits {
+  qeury getMaterialUnits {
     material_units {
       id
       code

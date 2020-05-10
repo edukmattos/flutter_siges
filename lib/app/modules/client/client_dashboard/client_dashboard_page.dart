@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_siges/app/models/client_model.dart';
-import 'package:mobx/mobx.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 
 import '../../../config/app_config.dart';
+import '../../../models/client_model.dart';
 import 'client_dashboard_controller.dart';
 
 class ClientDashboardPage extends StatefulWidget {

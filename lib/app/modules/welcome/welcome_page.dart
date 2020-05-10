@@ -15,13 +15,6 @@ class WelcomePage extends StatefulWidget {
 
 class _WelcomePageState extends ModularState<WelcomePage, WelcomeController> {
 
-  userIsLogged() async {
-    var result = await controller.userLogged();
-    if (result) {
-      Modular.to.pushReplacementNamed('/clients');
-    } 
-  }
-
   Widget _signInButton() {
     return InkWell(
       onTap: () {
@@ -149,7 +142,5 @@ class _WelcomePageState extends ModularState<WelcomePage, WelcomeController> {
   @override
   void initState() {
     super.initState();
-
-    userIsLogged();
   }
 }

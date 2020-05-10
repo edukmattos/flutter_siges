@@ -4,6 +4,6 @@ import '../modules/material/models/material_unit_model_dto.dart';
 abstract class IMaterialRepository {
 
   Stream<List<MaterialModel>> getMaterials(); 
-  Stream<List<MaterialUnitModelDto>> getMaterialUnits(); 
+  Future<MaterialUnitModelDto> getMaterialUnits(); 
 
 }

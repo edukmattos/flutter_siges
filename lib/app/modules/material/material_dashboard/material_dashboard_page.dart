@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_siges/app/modules/material/material_dashboard/material_dashboard_controller.dart';
 
 import '../../../config/app_config.dart';
+import '../../../widgets/drawer/drawer_home_widget.dart';
+import 'material_dashboard_controller.dart';
 
 class MaterialDashboardPage extends StatefulWidget {
   final String title;
@@ -16,6 +16,9 @@ class MaterialDashboardPage extends StatefulWidget {
 
 class _MaterialDashboardPageState
     extends ModularState<MaterialDashboardPage, MaterialDashboardController> {
+
+  int page = 0;
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,41 +54,20 @@ class _MaterialDashboardPageState
           ),
         ],
       ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              margin: EdgeInsets.zero,
-              child: Center(
-                child: Image(
-                  image: ExactAssetImage("images/logo.png"),
-                ),
-              ),
-            ),
-            ListTile(
-              leading: Icon(Icons.location_city),
-              title: Text('Partner'),
-              onTap: () {},
-            ),
-            ListTile(
-              leading: Icon(Icons.multiline_chart),
-              title: Text('Proyek'),
-              onTap: () {},
-            ),
-          ],
-        ),
+      drawer: DrawerHomeWidget(
+        page: page,
+        onTap: (int value) {
+          setState(() {
+            page = value;
+          });
+        }
       ),
-      body: Column(
+      body: IndexedStack(
+        index: page,
         children: <Widget>[
-          Observer(
-            builder: (BuildContext context) {
-              return Text(controller.count.toString());
-            }
-          )
-          
-          
-          ],
+          Container(color: Colors.blue),
+          Container(color: Colors.red),
+        ],
       ),
     );
   }
